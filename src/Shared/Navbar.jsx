@@ -2,9 +2,11 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { context } from "../ContextProvider/Provider";
 import Swal from "sweetalert2";
+import useHR from "../Hooks/useHR";
 
 const Navbar = () => {
   const { user, logOutUser } = useContext(context);
+  const [Role] = useHR();
   const handleLogOut = () => {
     logOutUser()
       .then(() => Swal.fire({ text: "Logout Successfully!", icon: "success" }))
@@ -12,14 +14,25 @@ const Navbar = () => {
   };
   const allLink = (
     <>
-      <li>
-        <NavLink
-          to="/dashboard"
-          className={({ isActive }) => (isActive ? " bg-slate-200" : "")}
-        >
-          Dashboard
-        </NavLink>
-      </li>
+      {Role?.user === "hr" ? (
+        <li>
+          <NavLink
+            to="/dashboard/hrHome"
+            className={({ isActive }) => (isActive ? " bg-slate-200" : "")}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      ) : (
+        <li>
+          <NavLink
+            to="/dashboard/emHome"
+            className={({ isActive }) => (isActive ? " bg-slate-200" : "")}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
       <li>
         <NavLink
           to="/contact"

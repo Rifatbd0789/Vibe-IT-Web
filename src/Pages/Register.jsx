@@ -21,13 +21,8 @@ const Register = () => {
     setRegisterError("");
     // host photo
     const photoFile = { image: data.photo[0] };
-    console.log(photoFile);
-    const res = await axiosOpen.post(image_hosting_api, photoFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    const photo = res.data.data.display_url;
+    // console.log(photoFile);
+
     const email = data.email;
     const password = data.password;
     const Name = data.name;
@@ -53,7 +48,12 @@ const Register = () => {
       );
       return;
     }
-
+    const res = await axiosOpen.post(image_hosting_api, photoFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    const photo = res.data.data.display_url;
     createUser(email, password)
       .then((result) => {
         updateProfile(result.user, {

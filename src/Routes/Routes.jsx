@@ -6,6 +6,7 @@ import Register from "../Pages/Register";
 import Dashboard from "../Layout/Dashboard";
 import HrHome from "../Dashboard/Home/HrHome";
 import EmployeeList from "../Dashboard/EmployeeList/EmployeeList";
+import EmploHome from "../Dashboard/Home/EmploHome";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -31,8 +32,12 @@ export const router = createBrowserRouter([
     element: <Dashboard />,
     children: [
       {
-        path: "/dashboard",
+        path: "/dashboard/hrHome",
         element: <HrHome />,
+      },
+      {
+        path: "/dashboard/emHome",
+        element: <EmploHome />,
       },
       {
         path: "/dashboard/employeeList",

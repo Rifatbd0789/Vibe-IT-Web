@@ -3,7 +3,8 @@ import useAxiosOpen from "../../Hooks/useAxiosOpen";
 import Table from "../../Components/Table";
 const EmployeeList = () => {
   const axiosOpen = useAxiosOpen();
-  const { data: employeeInfo } = useQuery({
+
+  const { data: employeeInfo, refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
       const res = await axiosOpen.get("/users");
@@ -25,7 +26,7 @@ const EmployeeList = () => {
         Total Employee: {employeeInfo?.length}
       </p>
       <div>
-        <Table header={header} body={employeeInfo} />
+        <Table header={header} body={employeeInfo} refetch={refetch} />
       </div>
     </div>
   );
