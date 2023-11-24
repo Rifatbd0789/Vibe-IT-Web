@@ -1,24 +1,40 @@
-import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
-import { updateProfile } from "firebase/auth";
+// import { updateProfile } from "firebase/auth";
 import { context } from "../ContextProvider/Provider";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
+import useAxiosOpen from "../Hooks/useAxiosOpen";
+import { useForm } from "react-hook-form";
+import { updateProfile } from "firebase/auth";
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
+  const { register, handleSubmit, reset } = useForm();
   const { createUser, googleLogIn } = useContext(context);
   const [registerError, setRegisterError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-  const handleRegister = (e) => {
-    e.preventDefault();
-    const form = new FormData(e.currentTarget);
-    const email = form.get("email");
-    const password = form.get("password");
-    const Name = form.get("displayName");
-    const photo = form.get("photo");
-
+  const axiosOpen = useAxiosOpen();
+  const onSubmit = async (data) => {
     setRegisterError("");
+    // host photo
+    const photoFile = { image: data.photo[0] };
+    console.log(photoFile);
+    const res = await axiosOpen.post(image_hosting_api, photoFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    const photo = res.data.data.display_url;
+    const email = data.email;
+    const password = data.password;
+    const Name = data.name;
+    const role = data.role;
+    const designation = data.designation;
+    const salary = data.salary;
+    const bank = data.bankNo;
 
     // password Validation
     if (password.length < 6) {
@@ -44,11 +60,24 @@ const Register = () => {
           displayName: Name,
           photoURL: photo,
         })
-          .then()
+          .then(() => {
+            const user = {
+              email: email,
+              name: Name,
+              role: role,
+              designation: designation,
+              salary: salary,
+              bank: bank,
+            };
+            axiosOpen.post("/users", user).then((res) => {
+              if (res.data.insertedId) {
+                Swal.fire(`${Name} Successfully Registered !`);
+                navigate("/login");
+              }
+            });
+          })
           .catch((error) => setRegisterError(error.code));
-        e.target.reset();
-        Swal.fire(`${Name} Successfully Registered !`);
-        navigate("/login");
+        reset();
       })
       .catch((error) => setRegisterError(error.code));
   };
@@ -64,65 +93,125 @@ const Register = () => {
   };
   return (
     <div>
-      <div className="hero min-h-screen  ">
-        <div className="hero-content flex-col lg:flex-col">
-          <div className="text-center lg:text-left">
-            <h1 className="text-3xl md:text-4xl text-white font-bold ">
-              Register Here!
-            </h1>
+      <div className=" min-h-screen  ">
+        <div className=" ">
+          <div className="text-center ">
+            <h1 className="text-3xl md:text-4xl font-bold ">Register Here!</h1>
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-            <form onSubmit={handleRegister} className="card-body">
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Name</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your Name..."
-                  className="input input-bordered"
-                  name="displayName"
-                />
+          <div className=" card bg-base-100">
+            <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+              <div className="flex flex-col md:flex-row w-full gap-5">
+                {/* Name */}
+                <div className="form-control md:w-1/2">
+                  <label className="label">
+                    <span className="label-text">Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your Name..."
+                    className="input input-bordered"
+                    {...register("name")}
+                  />
+                </div>
+                {/* Bank Account no */}
+                <div className="form-control md:w-1/2">
+                  <label className="label">
+                    <span className="label-text">Bank Account No:</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your Bank account no..."
+                    className="input input-bordered"
+                    {...register("bankNo")}
+                  />
+                </div>
               </div>
-              {/* <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Photo Url</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="Your photo url..."
-                  className="input input-bordered"
-                  name="photo"
-                />
-              </div> */}
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Email</span>
-                </label>
-                <input
-                  type="email"
-                  placeholder="email"
-                  className="input input-bordered"
-                  name="email"
-                  required
-                />
+
+              <div className="flex flex-col md:flex-row w-full gap-5">
+                {/* Designation */}
+                <div className="md:w-1/2 form-control">
+                  <label className="label">
+                    <span className="label-text">Designation</span>
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Your Designation..."
+                    className="input input-bordered"
+                    {...register("designation")}
+                  />
+                </div>
+                {/* Salary */}
+                <div className="md:w-1/2 form-control">
+                  <label className="label">
+                    <span className="label-text">Salary</span>
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Your Salary..."
+                    className="input input-bordered"
+                    {...register("salary")}
+                  />
+                </div>
               </div>
-              <div className="form-control">
-                <label className="label">
-                  <span className="label-text">Password</span>
-                </label>
-                <input
-                  type="password"
-                  placeholder="password"
-                  className="input input-bordered"
-                  name="password"
-                  required
-                />
+              <div className="flex flex-col md:flex-row w-full gap-5">
+                {/* Role */}
+                <div className="form-control md:w-1/2">
+                  <label className="label">
+                    <span className="label-text">Select your Role</span>
+                  </label>
+                  <select
+                    className="select select-warning w-full "
+                    {...register("role")}
+                    defaultValue="default"
+                  >
+                    <option disabled value="default"></option>
+                    <option>HR</option>
+                    <option>Employee</option>
+                  </select>
+                </div>
+                {/* photo */}
+                <div className="form-control md:w-1/2">
+                  <label className="label">
+                    <span className="label-text">Photo</span>
+                  </label>
+                  <input
+                    type="file"
+                    {...register("photo")}
+                    className="file-input file-input-bordered file-input-warning w-full "
+                  />
+                </div>
               </div>
+              <div className="flex flex-col md:flex-row w-full gap-5">
+                {/* Email */}
+                <div className="form-control md:w-1/2">
+                  <label className="label">
+                    <span className="label-text">Email</span>
+                  </label>
+                  <input
+                    type="email"
+                    placeholder="email"
+                    className="input input-bordered"
+                    {...register("email")}
+                  />
+                </div>
+                {/* Password */}
+                <div className="form-control md:w-1/2">
+                  <label className="label">
+                    <span className="label-text">Password</span>
+                  </label>
+                  <input
+                    type="password"
+                    placeholder="password"
+                    className="input input-bordered"
+                    {...register("password")}
+                  />
+                </div>
+              </div>
+
               {registerError && (
                 <p className="text-red-600 font-semibold">{registerError}</p>
               )}
-              <div className="form-control mt-6">
+              <div className="form-control mt-6 text-center">
                 <p className="mb-3">
                   Already Have an account ?{" "}
                   <Link to={"/login"}>
@@ -131,7 +220,8 @@ const Register = () => {
                     </span>
                   </Link>
                 </p>
-                <button className="btn  text-white hover:text-black hover:bg-white normal-case ">
+                {/* <input type="submit" /> */}
+                <button className="btn btn-warning  hover:text-black hover:bg-white normal-case ">
                   Register
                 </button>
               </div>

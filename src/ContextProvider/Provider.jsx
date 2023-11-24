@@ -44,6 +44,7 @@ const Provider = ({ children }) => {
       // const userEmail = currentUser?.email || user?.email;
       // const loggedEmail = { email: userEmail };
       setUser(currentUser);
+      console.log(currentUser);
       setLoading(false);
       // // if user exist than issue a token
       // if (currentUser) {
