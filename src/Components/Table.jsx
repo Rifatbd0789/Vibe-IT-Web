@@ -1,6 +1,7 @@
 // import { useState } from "react";
+import Swal from "sweetalert2";
 import useAxiosOpen from "../Hooks/useAxiosOpen";
-
+import { FaCheck, FaTimes } from "react-icons/fa";
 /* eslint-disable react/prop-types */
 const Table = ({ header, body, refetch }) => {
   //   console.log(header);
@@ -11,6 +12,27 @@ const Table = ({ header, body, refetch }) => {
         refetch();
       }
     });
+  };
+  const handlePayment = async (employee) => {
+    const { value: time } = await Swal.fire({
+      title: "Choose Check In Date",
+      text: `Salary: ${employee.salary}`,
+      inputAttributes: {
+        required: "true",
+      },
+      input: "month",
+      showCancelButton: true,
+      showConfirmButton: true,
+      inputLabel: "Check In Date",
+    });
+    if (time === undefined) {
+      return;
+    }
+    // const PayInfo = {
+    //   email: employee.email,
+    //   month: time,
+    // };
+    console.log(time);
   };
   return (
     <>
@@ -42,9 +64,9 @@ const Table = ({ header, body, refetch }) => {
                     <>
                       <button
                         onClick={() => verifyUser(employee.email)}
-                        className="btn btn-ghost btn-xs"
+                        className="btn btn-ghost btn-xs w-fit"
                       >
-                        verified
+                        <FaCheck />
                       </button>
                     </>
                   ) : (
@@ -52,14 +74,18 @@ const Table = ({ header, body, refetch }) => {
                       onClick={() => verifyUser(employee.email)}
                       className="btn btn-ghost btn-xs"
                     >
-                      not
+                      <FaTimes />
                     </button>
                   )}
                 </td>
-                <td className="whitespace-nowrap">{employee.bank}</td>
-                <td className="whitespace-nowrap">{employee.salary}</td>
+                <td className="whitespace-nowrap">{employee?.bank}</td>
+                <td className="whitespace-nowrap">{employee?.salary}</td>
                 <td className="whitespace-nowrap">
-                  <button className="btn btn-ghost btn-xs">
+                  <button
+                    onClick={() => handlePayment(employee)}
+                    disabled={employee?.Verified === false}
+                    className="btn btn-ghost btn-xs"
+                  >
                     {header?.Pay}
                   </button>
                 </td>
