@@ -68,6 +68,8 @@ const Register = () => {
               designation: designation,
               salary: salary,
               bank: bank,
+              photo: photo,
+              Verified: false,
             };
             axiosOpen.post("/users", user).then((res) => {
               if (res.data.insertedId) {

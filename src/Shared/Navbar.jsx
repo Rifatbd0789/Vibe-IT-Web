@@ -28,21 +28,79 @@ const Navbar = () => {
           Contact Us
         </NavLink>
       </li>
+      {user && (
+        <li>
+          <p>{user?.displayName}</p>
+        </li>
+      )}
       <li>
         {user ? (
           <>
-            <p className="text-sm md:text-xl">{user?.displayName}</p>
-            <img
-              className="w-12 rounded-full mr-2"
-              src={user?.photoURL}
-              alt=""
-            />
-            <NavLink
-              onClick={handleLogOut}
-              // className="btn btn-sm md:btn-md  "
-            >
-              Log Out
-            </NavLink>
+            <div className="dropdown dropdown-end">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS Navbar component"
+                    src={user?.photoURL}
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-52"
+              >
+                <li>
+                  <NavLink
+                    onClick={handleLogOut}
+                    // className="btn btn-sm md:btn-md  "
+                  >
+                    Log Out
+                  </NavLink>
+                </li>
+              </ul>
+            </div>
+            {/* <div className="flex">
+              <div>
+                <p className="text-sm">{user?.displayName}</p>
+              </div>
+              <details>
+                <summary>
+                  <img
+                    className="w-12 rounded-full mr-2"
+                    src={user?.photoURL}
+                    alt=""
+                  />
+                </summary>
+                <ul className="p-2 bg-base-100">
+                  <li>
+                    <a>Link 1</a>
+                  </li>
+                  <li>
+                    <a>Link 2</a>
+                  </li>
+                </ul>
+              </details>
+            </div> */}
+            {/* <div className="dropdown dropdown-end">
+                <label tabIndex={0} className="btn m-1">
+                  <img
+                    className="w-12 rounded-full mr-2"
+                    src={user?.photoURL}
+                    alt=""
+                  />
+                </label>
+                <ul
+                  tabIndex={0}
+                  className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52"
+                >
+                  <NavLink
+                    onClick={handleLogOut}
+                    // className="btn btn-sm md:btn-md  "
+                  >
+                    Log Out
+                  </NavLink>
+                </ul>
+              </div> */}
           </>
         ) : (
           <>
@@ -54,17 +112,6 @@ const Navbar = () => {
             </Link>
           </>
         )}
-        {/* <details>
-          <summary>Parent</summary>
-          <ul className="p-2">
-            <li>
-              <a>Link 1</a>
-            </li>
-            <li>
-              <a>Link 2</a>
-            </li>
-          </ul>
-        </details> */}
       </li>
     </>
   );
