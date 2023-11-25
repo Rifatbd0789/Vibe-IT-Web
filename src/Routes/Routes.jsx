@@ -7,6 +7,8 @@ import Dashboard from "../Layout/Dashboard";
 import HrHome from "../Dashboard/Home/HrHome";
 import EmployeeList from "../Dashboard/EmployeeList/EmployeeList";
 import EmploHome from "../Dashboard/Home/EmploHome";
+// import Table from "../Components/Table";
+
 export const router = createBrowserRouter([
   {
     path: "/",

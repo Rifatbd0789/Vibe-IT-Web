@@ -1,11 +1,40 @@
-// import { useState } from "react";
-import Swal from "sweetalert2";
 import useAxiosOpen from "../Hooks/useAxiosOpen";
 import { FaCheck, FaTimes } from "react-icons/fa";
+import Modal from "react-modal";
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
+import { useEffect, useState } from "react";
+import Swal from "sweetalert2";
 /* eslint-disable react/prop-types */
 const Table = ({ header, body, refetch }) => {
-  //   console.log(header);
+  const [error, setError] = useState("");
+  const [clientSecret, setClientSecret] = useState("");
+  const [transectionId, setTransectionId] = useState("");
   const axiosOpen = useAxiosOpen();
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [employeeToPay, setEmployeeToPay] = useState([]);
+  const customStyles = {
+    content: {
+      content: "center",
+      height: "70%",
+      width: "95%",
+      top: "50%",
+      left: "50%",
+      right: "auto",
+      bottom: "auto",
+      marginRight: "-50%",
+      transform: "translate(-50%, -50%)",
+    },
+  };
+  function openModal(employee) {
+    setEmployeeToPay(employee);
+    setIsOpen(true);
+  }
+  function closeModal() {
+    setIsOpen(false);
+  }
+  //   const [error, setError] = useState("");
+  const stripe = useStripe();
+  const elements = useElements();
   const verifyUser = (email) => {
     axiosOpen.put(`/users/${email}`).then((res) => {
       if (res.data.modifiedCount > 0) {
@@ -13,26 +42,78 @@ const Table = ({ header, body, refetch }) => {
       }
     });
   };
-  const handlePayment = async (employee) => {
-    const { value: time } = await Swal.fire({
-      title: "Choose Check In Date",
-      text: `Salary: ${employee.salary}`,
-      inputAttributes: {
-        required: "true",
-      },
-      input: "month",
-      showCancelButton: true,
-      showConfirmButton: true,
-      inputLabel: "Check In Date",
-    });
-    if (time === undefined) {
+  useEffect(() => {
+    if (employeeToPay.salary > 0) {
+      axiosOpen
+        .post("/create-payment-intent", { salary: employeeToPay.salary })
+        .then((res) => {
+          setClientSecret(res.data.clientSecret);
+        });
+    }
+  }, [axiosOpen, employeeToPay.salary]);
+  const handlePayment = async (e) => {
+    e.preventDefault();
+    console.log(employeeToPay);
+    const time = e.target.time.value;
+    // Payment via Stripe
+    if (!stripe || !elements) {
       return;
     }
-    // const PayInfo = {
-    //   email: employee.email,
-    //   month: time,
-    // };
-    console.log(time);
+    const card = elements.getElement(CardElement);
+    if (card == null) {
+      return;
+    }
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card,
+    });
+    if (error) {
+      console.log("error:", error);
+      setError(error.message);
+    } else {
+      console.log("payment method", paymentMethod);
+      setError("");
+    }
+    //Confirm Payment
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            email: employeeToPay?.email || "anonymous",
+            name: employeeToPay?.name || "anonymous",
+          },
+        },
+      });
+    if (confirmError) {
+      console.log("error", confirmError);
+    } else {
+      console.log("payment intent", paymentIntent);
+      if (paymentIntent.status === "succeeded") {
+        setTransectionId(paymentIntent.id);
+        // seve the payments in the database
+        const payment = {
+          email: employeeToPay.email,
+          salary: employeeToPay.salary,
+          transectionId: paymentIntent.id,
+          time: time,
+          status: "paid",
+        };
+        const res = await axiosOpen.post("/payments", payment);
+        console.log("payment saved", res);
+        if (res?.data?.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `Salary Paid to ${employeeToPay.name} for ${time}`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          setTransectionId("");
+          setIsOpen(false);
+        }
+      }
+    }
   };
   return (
     <>
@@ -82,7 +163,7 @@ const Table = ({ header, body, refetch }) => {
                 <td className="whitespace-nowrap">{employee?.salary}</td>
                 <td className="whitespace-nowrap">
                   <button
-                    onClick={() => handlePayment(employee)}
+                    onClick={() => openModal(employee)}
                     disabled={employee?.Verified === false}
                     className="btn btn-ghost btn-xs"
                   >
@@ -98,6 +179,57 @@ const Table = ({ header, body, refetch }) => {
             ))}
           </tbody>
         </table>
+        <Modal
+          isOpen={modalIsOpen}
+          //   onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <div className="space-y-10 text-center mx-0 md:mx-36">
+            <p>Name: {employeeToPay.name}</p>
+            <h2>Salary: {employeeToPay.salary}</h2>
+            <form onSubmit={handlePayment}>
+              <input
+                required
+                className="input input-warning"
+                type="month"
+                name="time"
+              />
+              <div className="py-10">
+                <CardElement
+                  options={{
+                    style: {
+                      base: {
+                        width: "50%",
+                        fontSize: "16px",
+                        color: "#424770",
+                        "::placeholder": {
+                          color: "#eab308",
+                        },
+                      },
+                      invalid: {
+                        color: "#9e2146",
+                      },
+                    },
+                  }}
+                />
+              </div>
+              <div className="flex gap-10 justify-center">
+                <input className="btn" type="submit" value="Pay" />
+                <button className="btn" onClick={closeModal}>
+                  close
+                </button>
+              </div>
+            </form>
+          </div>
+          <p className="text-red-600">{error}</p>
+          {transectionId && (
+            <p className="text-green-600">
+              Your Transection id: {transectionId}
+            </p>
+          )}
+        </Modal>
       </div>
     </>
   );
