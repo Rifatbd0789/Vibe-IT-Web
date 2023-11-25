@@ -57,9 +57,8 @@ const Table = ({ header, body, refetch }) => {
     const time = e.target.time.value;
     // validate the month and year and do not pay for same
     const res = await axiosOpen.get(
-      `http://localhost:5000/dashboard/details/${employeeToPay?.email}`
+      `/dashboard/details/${employeeToPay?.email}`
     );
-    console.log(res.data);
     const filter = res.data.filter((date) => date.time === time);
     console.log(filter);
     if (filter.length > 0) {
@@ -130,125 +129,121 @@ const Table = ({ header, body, refetch }) => {
     }
   };
   return (
-    <>
-      <div className="overflow-auto rounded-lg shadow">
-        <table className="table ">
-          {/* head */}
-          <thead className="divide-y divide-gray-100">
-            <tr>
-              <th className="whitespace-nowrap">#</th>
-              <th className="whitespace-nowrap">{header.Name}</th>
-              <th className="whitespace-nowrap">{header.Email}</th>
-              <th className="whitespace-nowrap">{header.Verified}</th>
-              <th className="whitespace-nowrap">{header.BankAccount}</th>
-              <th className="whitespace-nowrap">{header.Salary}</th>
-              <th className="whitespace-nowrap">{header.Pay}</th>
-              <th className="whitespace-nowrap">{header.Details}</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-gray-100">
-            {body?.map((employee, index) => (
-              <tr key={employee._id}>
-                <td className="whitespace-nowrap">{index + 1}</td>
-                <td className="whitespace-nowrap">
-                  <div className="font-bold">{employee.name}</div>
-                </td>
-                <td className="whitespace-nowrap">{employee.email}</td>
-                <td className="whitespace-nowrap">
-                  {employee?.Verified === true ? (
-                    <>
-                      <button
-                        onClick={() => verifyUser(employee?.email)}
-                        className="btn btn-ghost btn-xs w-fit"
-                      >
-                        <FaCheck />
-                      </button>
-                    </>
-                  ) : (
+    <div className="overflow-auto rounded-lg shadow">
+      <table className="table ">
+        {/* head */}
+        <thead className="divide-y divide-gray-100">
+          <tr>
+            <th className="whitespace-nowrap">#</th>
+            <th className="whitespace-nowrap">{header.Name}</th>
+            <th className="whitespace-nowrap">{header.Email}</th>
+            <th className="whitespace-nowrap">{header.Verified}</th>
+            <th className="whitespace-nowrap">{header.BankAccount}</th>
+            <th className="whitespace-nowrap">{header.Salary}</th>
+            <th className="whitespace-nowrap">{header.Pay}</th>
+            <th className="whitespace-nowrap">{header.Details}</th>
+          </tr>
+        </thead>
+        <tbody className="divide-y divide-gray-100">
+          {body?.map((employee, index) => (
+            <tr key={employee._id}>
+              <td className="whitespace-nowrap">{index + 1}</td>
+              <td className="whitespace-nowrap">
+                <div className="font-bold">{employee.name}</div>
+              </td>
+              <td className="whitespace-nowrap">{employee.email}</td>
+              <td className="whitespace-nowrap">
+                {employee?.Verified === true ? (
+                  <>
                     <button
                       onClick={() => verifyUser(employee?.email)}
-                      className="btn btn-ghost btn-xs"
+                      className="btn btn-ghost btn-xs w-fit"
                     >
-                      <FaTimes />
+                      <FaCheck />
                     </button>
-                  )}
-                </td>
-                <td className="whitespace-nowrap">{employee?.bank}</td>
-                <td className="whitespace-nowrap">{employee?.salary}</td>
-                <td className="whitespace-nowrap">
+                  </>
+                ) : (
                   <button
-                    onClick={() => openModal(employee)}
-                    disabled={employee?.Verified === false}
+                    onClick={() => verifyUser(employee?.email)}
                     className="btn btn-ghost btn-xs"
                   >
-                    {header?.Pay}
+                    <FaTimes />
                   </button>
-                </td>
-                <td className="whitespace-nowrap">
-                  <button className="btn btn-ghost btn-xs">
-                    {header?.Details && (
-                      <Link to={`/dashboard/details/${employee?.email}`}>
-                        Details
-                      </Link>
-                    )}
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        <Modal
-          isOpen={modalIsOpen}
-          //   onAfterOpen={afterOpenModal}
-          onRequestClose={closeModal}
-          style={customStyles}
-          contentLabel="Example Modal"
-        >
-          <div className="space-y-10 text-center mx-0 md:mx-36">
-            <p>Name: {employeeToPay.name}</p>
-            <h2>Salary: {employeeToPay.salary}</h2>
-            <form onSubmit={handlePayment}>
-              <input
-                required
-                className="input input-warning"
-                type="month"
-                name="time"
-              />
-              <div className="py-10">
-                <CardElement
-                  options={{
-                    style: {
-                      base: {
-                        fontSize: "16px",
-                        color: "#424770",
-                        "::placeholder": {
-                          color: "#eab308",
-                        },
-                      },
-                      invalid: {
-                        color: "#9e2146",
+                )}
+              </td>
+              <td className="whitespace-nowrap">{employee?.bank}</td>
+              <td className="whitespace-nowrap">{employee?.salary}</td>
+              <td className="whitespace-nowrap">
+                <button
+                  onClick={() => openModal(employee)}
+                  disabled={employee?.Verified === false}
+                  className="btn btn-outline btn-warning btn-sm"
+                >
+                  {header?.Pay}
+                </button>
+              </td>
+              <td className="whitespace-nowrap">
+                <Link
+                  className="btn btn-outline   btn-sm"
+                  to={`/dashboard/details/${employee?.email}`}
+                >
+                  Details
+                </Link>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+
+      <Modal
+        isOpen={modalIsOpen}
+        //   onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        style={customStyles}
+        contentLabel="Example Modal"
+      >
+        <div className="space-y-10 text-center mx-0 md:mx-36">
+          <p>Name: {employeeToPay.name}</p>
+          <h2>Salary: {employeeToPay.salary}</h2>
+          <form onSubmit={handlePayment}>
+            <input
+              required
+              className="input input-warning"
+              type="month"
+              name="time"
+            />
+            <div className="py-10">
+              <CardElement
+                options={{
+                  style: {
+                    base: {
+                      fontSize: "16px",
+                      color: "#424770",
+                      "::placeholder": {
+                        color: "#eab308",
                       },
                     },
-                  }}
-                />
-              </div>
-              <div className="flex gap-10 justify-center">
-                <input className="btn" type="submit" value="Pay" />
-                <button className="btn" onClick={closeModal}>
-                  close
-                </button>
-              </div>
-            </form>
-          </div>
-          <p className="text-red-600">{error}</p>
-          {transectionId && (
-            <p className="text-green-600">
-              Your Transection id: {transectionId}
-            </p>
-          )}
-        </Modal>
-      </div>
-    </>
+                    invalid: {
+                      color: "#9e2146",
+                    },
+                  },
+                }}
+              />
+            </div>
+            <div className="flex gap-10 justify-center">
+              <input className="btn" type="submit" value="Pay" />
+              <button className="btn" onClick={closeModal}>
+                close
+              </button>
+            </div>
+          </form>
+        </div>
+        <p className="text-red-600">{error}</p>
+        {transectionId && (
+          <p className="text-green-600">Your Transection id: {transectionId}</p>
+        )}
+      </Modal>
+    </div>
   );
 };
 
