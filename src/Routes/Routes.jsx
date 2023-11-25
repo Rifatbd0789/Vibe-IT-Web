@@ -50,7 +50,7 @@ export const router = createBrowserRouter([
         path: "/dashboard/details/:email",
         element: <Details />,
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/dashboard/details/${params.email}`),
+          fetch(`http://localhost:5000/dashboard/details/${params?.email}`),
       },
     ],
   },

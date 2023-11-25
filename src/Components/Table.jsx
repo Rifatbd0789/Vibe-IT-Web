@@ -55,6 +55,17 @@ const Table = ({ header, body, refetch }) => {
   const handlePayment = async (e) => {
     e.preventDefault();
     const time = e.target.time.value;
+    // validate the month and year and do not pay for same
+    const res = await axiosOpen.get(
+      `http://localhost:5000/dashboard/details/${employeeToPay?.email}`
+    );
+    console.log(res.data);
+    const filter = res.data.filter((date) => date.time === time);
+    console.log(filter);
+    if (filter.length > 0) {
+      Swal.fire("You have already paid for that month !");
+      return;
+    }
     // Payment via Stripe
     if (!stripe || !elements) {
       return;
@@ -147,7 +158,7 @@ const Table = ({ header, body, refetch }) => {
                   {employee?.Verified === true ? (
                     <>
                       <button
-                        onClick={() => verifyUser(employee.email)}
+                        onClick={() => verifyUser(employee?.email)}
                         className="btn btn-ghost btn-xs w-fit"
                       >
                         <FaCheck />
@@ -155,7 +166,7 @@ const Table = ({ header, body, refetch }) => {
                     </>
                   ) : (
                     <button
-                      onClick={() => verifyUser(employee.email)}
+                      onClick={() => verifyUser(employee?.email)}
                       className="btn btn-ghost btn-xs"
                     >
                       <FaTimes />
@@ -176,7 +187,7 @@ const Table = ({ header, body, refetch }) => {
                 <td className="whitespace-nowrap">
                   <button className="btn btn-ghost btn-xs">
                     {header?.Details && (
-                      <Link to={`/dashboard/details/${employee.email}`}>
+                      <Link to={`/dashboard/details/${employee?.email}`}>
                         Details
                       </Link>
                     )}
@@ -208,7 +219,6 @@ const Table = ({ header, body, refetch }) => {
                   options={{
                     style: {
                       base: {
-                        width: "50%",
                         fontSize: "16px",
                         color: "#424770",
                         "::placeholder": {
