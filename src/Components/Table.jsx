@@ -4,6 +4,7 @@ import Modal from "react-modal";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { Link } from "react-router-dom";
 /* eslint-disable react/prop-types */
 const Table = ({ header, body, refetch }) => {
   const [error, setError] = useState("");
@@ -53,7 +54,6 @@ const Table = ({ header, body, refetch }) => {
   }, [axiosOpen, employeeToPay.salary]);
   const handlePayment = async (e) => {
     e.preventDefault();
-    console.log(employeeToPay);
     const time = e.target.time.value;
     // Payment via Stripe
     if (!stripe || !elements) {
@@ -93,6 +93,9 @@ const Table = ({ header, body, refetch }) => {
         setTransectionId(paymentIntent.id);
         // seve the payments in the database
         const payment = {
+          name: employeeToPay.name,
+          photo: employeeToPay.photo,
+          designation: employeeToPay.designation,
           email: employeeToPay.email,
           salary: employeeToPay.salary,
           transectionId: paymentIntent.id,
@@ -172,7 +175,11 @@ const Table = ({ header, body, refetch }) => {
                 </td>
                 <td className="whitespace-nowrap">
                   <button className="btn btn-ghost btn-xs">
-                    {header?.Details}
+                    {header?.Details && (
+                      <Link to={`/dashboard/details/${employee.email}`}>
+                        Details
+                      </Link>
+                    )}
                   </button>
                 </td>
               </tr>

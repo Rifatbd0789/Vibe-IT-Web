@@ -7,6 +7,7 @@ import Dashboard from "../Layout/Dashboard";
 import HrHome from "../Dashboard/Home/HrHome";
 import EmployeeList from "../Dashboard/EmployeeList/EmployeeList";
 import EmploHome from "../Dashboard/Home/EmploHome";
+import Details from "../Dashboard/Details/Details";
 // import Table from "../Components/Table";
 
 export const router = createBrowserRouter([
@@ -44,6 +45,12 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/employeeList",
         element: <EmployeeList />,
+      },
+      {
+        path: "/dashboard/details/:email",
+        element: <Details />,
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/dashboard/details/${params.email}`),
       },
     ],
   },
