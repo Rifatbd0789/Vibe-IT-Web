@@ -23,10 +23,19 @@ const Navbar = () => {
             Dashboard
           </NavLink>
         </li>
-      ) : (
+      ) : Role?.user === "employee" ? (
         <li>
           <NavLink
             to="/dashboard/emHome"
+            className={({ isActive }) => (isActive ? " bg-slate-200" : "")}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      ) : (
+        <li>
+          <NavLink
+            to="/dashboard/adHome"
             className={({ isActive }) => (isActive ? " bg-slate-200" : "")}
           >
             Dashboard

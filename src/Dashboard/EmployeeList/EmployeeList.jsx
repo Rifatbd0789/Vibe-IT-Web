@@ -9,9 +9,9 @@ const EmployeeList = () => {
   const axiosOpen = useAxiosOpen();
 
   const { data: employeeInfo, refetch } = useQuery({
-    queryKey: ["users"],
+    queryKey: ["employee"],
     queryFn: async () => {
-      const res = await axiosOpen.get("/users");
+      const res = await axiosOpen.get("/employee");
       return res.data;
     },
   });
