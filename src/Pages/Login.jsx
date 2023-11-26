@@ -19,7 +19,13 @@ const Login = () => {
     logInUser(email, password)
       .then(() => {
         e.target.reset();
-        Swal.fire("Successfully! Logged In! ");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          text: "Successfully! Logged In! ",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate(location?.state ? location.state : "/");
       })
       .catch((err) => setLogInError(err.code));
@@ -29,7 +35,13 @@ const Login = () => {
     setLogInError("");
     googleLogIn()
       .then(() => {
-        Swal.fire(" Successfully! Registered & Logged In!");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          text: "Successfully! Registered & Logged In! ",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => setLogInError(error.code));

@@ -9,7 +9,15 @@ const Navbar = () => {
   const [Role] = useHR();
   const handleLogOut = () => {
     logOutUser()
-      .then(() => Swal.fire({ text: "Logout Successfully!", icon: "success" }))
+      .then(() =>
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          text: "LogOut Successfully!",
+          showConfirmButton: false,
+          timer: 1500,
+        })
+      )
       .catch((err) => Swal.fire(err.code));
   };
   const allLink = (

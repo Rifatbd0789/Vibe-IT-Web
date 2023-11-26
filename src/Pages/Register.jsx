@@ -70,10 +70,17 @@ const Register = () => {
               bank: bank,
               photo: photo,
               Verified: false,
+              fire: false,
             };
             axiosOpen.post("/users", user).then((res) => {
               if (res.data.insertedId) {
-                Swal.fire(`${Name} Successfully Registered !`);
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  text: `${Name} Successfully Registered !`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
                 navigate("/login");
               }
             });
@@ -88,7 +95,13 @@ const Register = () => {
     setRegisterError("");
     googleLogIn()
       .then(() => {
-        Swal.fire(" Successfully Registered & Logged In!");
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          text: "Successfully! Registered & Logged In! ",
+          showConfirmButton: false,
+          timer: 1500,
+        });
         navigate(location?.state ? location.state : "/");
       })
       .catch((error) => setRegisterError(error));
