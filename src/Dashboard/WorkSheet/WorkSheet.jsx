@@ -5,6 +5,7 @@ import useAxiosOpen from "../../Hooks/useAxiosOpen";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
+import WorkTable from "./WorkTable";
 
 const people = [
   { name: "Sales" },
@@ -20,10 +21,10 @@ const WorkSheet = () => {
 
   const user = useAuth();
 
-  const { data: workData, refetch } = useQuery({
+  const { data: worksData, refetch } = useQuery({
     queryKey: ["workData"],
     queryFn: async () => {
-      const res = await axiosOpen.get(`/worksheet/${user.user.email}`);
+      const res = await axiosOpen.get(`/worksheet/${user?.user?.email}`);
       return res.data;
     },
   });
@@ -54,13 +55,12 @@ const WorkSheet = () => {
     e.target.reset();
     refetch();
   };
-  console.log(workData);
   return (
     <div className="mx-10">
       {/* Work Form */}
-      <div className="flex justify-evenly">
+      <div className="flex flex-col lg:flex-row md:justify-evenly ">
         {/* Drop Down */}
-        <div className=" w-72 ">
+        <div className="  lg:w-72 z-30">
           <label>Tasks:</label>
           <Listbox value={selected} onChange={setSelected}>
             <div className="relative mt-1">
@@ -115,7 +115,10 @@ const WorkSheet = () => {
             </div>
           </Listbox>
         </div>
-        <form onSubmit={handleWorkSheet} className=" flex gap-10 ">
+        <form
+          onSubmit={handleWorkSheet}
+          className=" flex flex-col lg:flex-row gap-2 lg:gap-10 "
+        >
           {/* hours Worked */}
           <div className="grid">
             <label>Hours Worked:</label>
@@ -124,6 +127,7 @@ const WorkSheet = () => {
               placeholder="Hours Worked"
               type="number"
               name="hour"
+              required
             />
           </div>
           {/* Date */}
@@ -137,13 +141,19 @@ const WorkSheet = () => {
             />
           </div>
           {/* submit button */}
-          <div className="mt-5">
-            <input className="btn" type="submit" value="Add" />
+          <div className="mt-5 flex justify-center">
+            <input
+              className="btn btn-outline btn-warning"
+              type="submit"
+              value="Add"
+            />
           </div>
         </form>
       </div>
       {/* Table */}
-      <div></div>
+      <div className="">
+        <WorkTable worksData={worksData} />
+      </div>
     </div>
   );
 };

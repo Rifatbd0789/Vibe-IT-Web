@@ -18,7 +18,7 @@ const DashNav = () => {
               </li>
               <div className="divider divider-horizontal divider-warning"></div>
               <li>
-                <NavLink to="/dashboard/hrHome">Last</NavLink>
+                <NavLink to="/dashboard/progress">Progress</NavLink>
               </li>
             </>
           ) : (

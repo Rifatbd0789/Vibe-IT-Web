@@ -10,6 +10,7 @@ import EmploHome from "../Dashboard/Home/EmploHome";
 import Details from "../Dashboard/Details/Details";
 import PaymentHistory from "../Dashboard/PaymentHistory/PaymentHistory";
 import WorkSheet from "../Dashboard/WorkSheet/WorkSheet";
+import Progress from "../Dashboard/ProgressHR/Progress";
 // import Table from "../Components/Table";
 
 export const router = createBrowserRouter([
@@ -55,6 +56,10 @@ export const router = createBrowserRouter([
       {
         path: "/dashboard/workSheet",
         element: <WorkSheet />,
+      },
+      {
+        path: "/dashboard/progress",
+        element: <Progress />,
       },
       {
         path: "/dashboard/details/:email",
