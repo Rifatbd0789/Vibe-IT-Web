@@ -96,7 +96,7 @@ const Register = () => {
   return (
     <div>
       <div className=" min-h-screen  ">
-        <div className=" ">
+        <div>
           <div className="text-center ">
             <h1 className="text-3xl md:text-4xl font-bold ">Register Here!</h1>
           </div>
@@ -164,6 +164,7 @@ const Register = () => {
                   <select
                     className="select select-warning w-full "
                     {...register("role")}
+                    required
                     defaultValue="default"
                   >
                     <option disabled value="default"></option>
@@ -192,6 +193,7 @@ const Register = () => {
                   <input
                     type="email"
                     placeholder="email"
+                    required
                     className="input input-bordered"
                     {...register("email")}
                   />
@@ -204,6 +206,7 @@ const Register = () => {
                   <input
                     type="password"
                     placeholder="password"
+                    required
                     className="input input-bordered"
                     {...register("password")}
                   />
