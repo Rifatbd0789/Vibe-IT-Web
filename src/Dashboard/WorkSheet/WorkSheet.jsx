@@ -1,8 +1,10 @@
 import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
-// import useAxiosOpen from "../../Hooks/useAxiosOpen";
+import useAxiosOpen from "../../Hooks/useAxiosOpen";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
 
 const people = [
   { name: "Sales" },
@@ -13,11 +15,18 @@ const people = [
   { name: "Design" },
 ];
 const WorkSheet = () => {
-  // const axiosOpen = useAxiosOpen();
+  const axiosOpen = useAxiosOpen();
   const [selected, setSelected] = useState(people[0]);
-  console.log(selected.name);
+
   const user = useAuth();
 
+  const { data: workData, refetch } = useQuery({
+    queryKey: ["workData"],
+    queryFn: async () => {
+      const res = await axiosOpen.get(`/worksheet/${user.user.email}`);
+      return res.data;
+    },
+  });
   const handleWorkSheet = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -27,15 +36,25 @@ const WorkSheet = () => {
       task: selected.name,
       hour: hour,
       date: date,
-      name: user.name,
-      email: user.email,
+      name: user.user.displayName,
+      email: user.user.email,
+      timeStamp: new Date(),
     };
-    console.log(workSheet);
     // sending data to database
-    // const res = await axiosOpen.post('/worksheet', workSheet)
-    // console.log(res.data)
+    const res = await axiosOpen.post("/worksheet", workSheet);
+    if (res.data.insertedId) {
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your work has been saved and updated",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    }
+    e.target.reset();
+    refetch();
   };
-
+  console.log(workData);
   return (
     <div className="mx-10">
       {/* Work Form */}
@@ -110,7 +129,12 @@ const WorkSheet = () => {
           {/* Date */}
           <div className="grid">
             <label>Date:</label>
-            <input className="input input-warning" type="date" name="date" />
+            <input
+              className="input input-warning"
+              type="date"
+              name="date"
+              required
+            />
           </div>
           {/* submit button */}
           <div className="mt-5">
