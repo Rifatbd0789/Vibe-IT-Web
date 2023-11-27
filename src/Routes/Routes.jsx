@@ -13,6 +13,10 @@ import WorkSheet from "../Dashboard/WorkSheet/WorkSheet";
 import Progress from "../Dashboard/ProgressHR/Progress";
 import AdHome from "../Dashboard/Home/AdHome";
 import AllEmployee from "../Dashboard/AllEmployee/AllEmployee";
+import Private from "./Private";
+import HrRoute from "./HrRoute";
+import EmployeeRoute from "./EmployeeRoute";
+import AdminRoute from "./AdminRoute";
 // import Table from "../Components/Table";
 
 export const router = createBrowserRouter([
@@ -37,43 +41,83 @@ export const router = createBrowserRouter([
   // Dashboard
   {
     path: "dashboard",
-    element: <Dashboard />,
+    element: (
+      <Private>
+        <Dashboard />
+      </Private>
+    ),
     children: [
       {
         path: "/dashboard/hrHome",
-        element: <HrHome />,
+        element: (
+          <HrRoute>
+            <HrHome />
+          </HrRoute>
+        ),
       },
       {
         path: "/dashboard/emHome",
-        element: <EmploHome />,
+        element: (
+          <EmployeeRoute>
+            <EmploHome />
+          </EmployeeRoute>
+        ),
       },
       {
         path: "/dashboard/adHome",
-        element: <AdHome />,
+        element: (
+          <AdminRoute>
+            <AdHome />,
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/employeeList",
-        element: <EmployeeList />,
+        element: (
+          <HrRoute>
+            <EmployeeList />,
+          </HrRoute>
+        ),
       },
       {
-        path: "/dashboard/allemployee",
-        element: <AllEmployee />,
+        path: "/dashboard/allEmployee",
+        element: (
+          <AdminRoute>
+            <AllEmployee />,
+          </AdminRoute>
+        ),
       },
       {
         path: "/dashboard/paymentHistory",
-        element: <PaymentHistory />,
+        element: (
+          <EmployeeRoute>
+            <PaymentHistory />,
+          </EmployeeRoute>
+        ),
       },
       {
         path: "/dashboard/workSheet",
-        element: <WorkSheet />,
+        element: (
+          <EmployeeRoute>
+            <WorkSheet />,
+          </EmployeeRoute>
+        ),
       },
       {
         path: "/dashboard/progress",
-        element: <Progress />,
+        element: (
+          <HrRoute>
+            <Progress />,
+          </HrRoute>
+        ),
       },
       {
         path: "/dashboard/details/:email",
-        element: <Details />,
+        element: (
+          <HrRoute>
+            <Details />
+          </HrRoute>
+        ),
         loader: ({ params }) =>
           fetch(`http://localhost:5000/dashboard/details/${params?.email}`),
       },

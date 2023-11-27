@@ -1,18 +1,17 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
-// import { updateProfile } from "firebase/auth";
-import { context } from "../ContextProvider/Provider";
+import { useState } from "react";
 import Swal from "sweetalert2";
 import { FcGoogle } from "react-icons/fc";
 import useAxiosOpen from "../Hooks/useAxiosOpen";
 import { useForm } from "react-hook-form";
 import { updateProfile } from "firebase/auth";
+import useAuth from "../Hooks/useAuth";
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const Register = () => {
   const { register, handleSubmit, reset } = useForm();
-  const { createUser, googleLogIn } = useContext(context);
+  const { createUser, googleLogIn } = useAuth();
   const [registerError, setRegisterError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -75,7 +74,7 @@ const Register = () => {
             axiosOpen.post("/users", user).then((res) => {
               if (res.data.insertedId) {
                 Swal.fire({
-                  position: "top-end",
+                  position: "middle",
                   icon: "success",
                   text: `${Name} Successfully Registered !`,
                   showConfirmButton: false,
@@ -96,7 +95,7 @@ const Register = () => {
     googleLogIn()
       .then(() => {
         Swal.fire({
-          position: "top-end",
+          position: "middle",
           icon: "success",
           text: "Successfully! Registered & Logged In! ",
           showConfirmButton: false,

@@ -1,8 +1,8 @@
 import { NavLink } from "react-router-dom";
-import useHR from "../../Hooks/useHR";
+import useRole from "../../Hooks/useRole";
 
 const DashNav = () => {
-  const [Role] = useHR();
+  const [Role] = useRole();
   return (
     <div>
       <div>

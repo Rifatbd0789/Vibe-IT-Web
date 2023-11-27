@@ -17,7 +17,7 @@ const AllEmployee = () => {
     const res = await axiosOpen.put(`/user/${user.email}`);
     if (res.data.modifiedCount > 0) {
       Swal.fire({
-        position: "top-end",
+        position: "middle",
         icon: "success",
         title: `${user?.name} is now a HR !`,
         showConfirmButton: false,
@@ -40,7 +40,7 @@ const AllEmployee = () => {
         const res = await axiosOpen.put(`/users/fire/${user.email}`);
         if (res.data.modifiedCount > 0) {
           Swal.fire({
-            position: "top-end",
+            position: "middle",
             icon: "success",
             title: `${user?.name} is Fired !`,
             showConfirmButton: false,

@@ -1,12 +1,12 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-import { context } from "../ContextProvider/Provider";
 import Swal from "sweetalert2";
 import useAxiosOpen from "../Hooks/useAxiosOpen";
+import useAuth from "../Hooks/useAuth";
 
 const Login = () => {
-  const { logInUser, googleLogIn } = useContext(context);
+  const { logInUser, googleLogIn } = useAuth();
   const [logInerror, setLogInError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
@@ -26,7 +26,7 @@ const Login = () => {
       .then(() => {
         e.target.reset();
         Swal.fire({
-          position: "top-end",
+          position: "middle",
           icon: "success",
           text: "Successfully! Logged In! ",
           showConfirmButton: false,
@@ -42,7 +42,7 @@ const Login = () => {
     googleLogIn()
       .then(() => {
         Swal.fire({
-          position: "top-end",
+          position: "middle",
           icon: "success",
           text: "Successfully! Registered & Logged In! ",
           showConfirmButton: false,

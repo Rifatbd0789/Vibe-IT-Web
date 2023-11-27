@@ -45,7 +45,7 @@ const WorkSheet = () => {
     const res = await axiosOpen.post("/worksheet", workSheet);
     if (res.data.insertedId) {
       Swal.fire({
-        position: "top-end",
+        position: "middle",
         icon: "success",
         title: "Your work has been saved and updated",
         showConfirmButton: false,

@@ -116,7 +116,7 @@ const Table = ({ header, body, refetch }) => {
         console.log("payment saved", res);
         if (res?.data?.insertedId) {
           Swal.fire({
-            position: "top-end",
+            position: "middle",
             icon: "success",
             title: `Salary Paid to ${employeeToPay.name} for ${time}`,
             showConfirmButton: false,

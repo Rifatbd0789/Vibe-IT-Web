@@ -1,17 +1,16 @@
-import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
-import { context } from "../ContextProvider/Provider";
 import Swal from "sweetalert2";
-import useHR from "../Hooks/useHR";
+import useRole from "../Hooks/useRole";
+import useAuth from "../Hooks/useAuth";
 
 const Navbar = () => {
-  const { user, logOutUser } = useContext(context);
-  const [Role] = useHR();
+  const { user, logOutUser } = useAuth();
+  const [Role] = useRole();
   const handleLogOut = () => {
     logOutUser()
       .then(() =>
         Swal.fire({
-          position: "top-end",
+          position: "middle",
           icon: "success",
           text: "LogOut Successfully!",
           showConfirmButton: false,
