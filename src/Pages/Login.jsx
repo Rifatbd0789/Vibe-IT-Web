@@ -3,19 +3,25 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { context } from "../ContextProvider/Provider";
 import Swal from "sweetalert2";
+import useAxiosOpen from "../Hooks/useAxiosOpen";
 
 const Login = () => {
   const { logInUser, googleLogIn } = useContext(context);
   const [logInerror, setLogInError] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-
-  const handleLogin = (e) => {
+  const axiosOpen = useAxiosOpen();
+  const handleLogin = async (e) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
     const email = form.get("email");
     const password = form.get("password");
     setLogInError("");
+    const res = await axiosOpen.get(`/users/${email}`);
+    if (res.data.fire === true) {
+      setLogInError("Sorry! You are fired!");
+      return;
+    }
     logInUser(email, password)
       .then(() => {
         e.target.reset();

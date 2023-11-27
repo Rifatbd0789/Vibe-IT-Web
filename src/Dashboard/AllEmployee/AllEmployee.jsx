@@ -26,6 +26,31 @@ const AllEmployee = () => {
     }
     refetch();
   };
+  const handleFire = (user) => {
+    Swal.fire({
+      title: `Are you sure to fire ${user.name} ?`,
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const res = await axiosOpen.put(`/users/fire/${user.email}`);
+        if (res.data.modifiedCount > 0) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: `${user?.name} is Fired !`,
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        refetch();
+      }
+    });
+  };
   return (
     <div>
       <div className="text-center space-y-3">
@@ -80,7 +105,18 @@ const AllEmployee = () => {
                         )}
                       </td>
 
-                      <td>{user?.date}</td>
+                      <td>
+                        {user.fire === true ? (
+                          <p className="text-red-400">Fired</p>
+                        ) : (
+                          <button
+                            onClick={() => handleFire(user)}
+                            className="btn"
+                          >
+                            Fire
+                          </button>
+                        )}
+                      </td>
                     </tr>
                   ))
                 )}
@@ -112,7 +148,13 @@ const AllEmployee = () => {
                     ) : (
                       <p className="my-5 text-green-400">Already {user.role}</p>
                     )}
-                    <button className="btn">Fire</button>
+                    {user?.fire === true ? (
+                      <p className="text-red-400">Fired</p>
+                    ) : (
+                      <button onClick={() => handleFire(user)} className="btn">
+                        Fire
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
