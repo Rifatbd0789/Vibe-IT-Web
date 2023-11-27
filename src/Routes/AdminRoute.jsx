@@ -8,7 +8,11 @@ const AdminRoute = ({ children }) => {
   const { user, loading, logOutUser } = useAuth();
   const [Role, isRoleLoading] = useRole();
   if (loading || isRoleLoading) {
-    return <progress className="progress w-56"></progress>;
+    return (
+      <div className="flex justify-center ">
+        <span className="loading loading-spinner text-yellow-400 mt-36 pt-36 pl-36"></span>
+      </div>
+    );
   }
   if (user && Role?.user === "Admin") {
     return children;

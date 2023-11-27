@@ -15,7 +15,7 @@ const Progress = () => {
   });
   const people = employeeName;
   const [selected, setSelected] = useState({ name: "search" });
-  const [progressDatas, setProgressDatas] = useState([]);
+  // const [progressDatas, setProgressDatas] = useState(progress);
   const { data: progress, refetch } = useQuery({
     queryKey: ["progress"],
     queryFn: async () => {
@@ -23,15 +23,14 @@ const Progress = () => {
       return res.data;
     },
   });
-
+  const [progressDatas, setProgressDatas] = useState(progress);
   const totalHour = progressDatas?.reduce((acc, data) => {
     return acc + parseInt(data.hour);
   }, 0);
   useEffect(() => {
-    refetch();
     setProgressDatas(progress);
+    refetch();
   }, [progress, refetch, selected]);
-  // console.log(progressDatas);
   const handleSort = (e) => {
     console.log(e.target.value);
     const matchingMonth = progress.filter((data) => {
@@ -39,9 +38,9 @@ const Progress = () => {
       const monthFromData = dateObject.getMonth() + 1;
       return parseInt(e.target.value) === monthFromData;
     });
-    console.log(matchingMonth);
     setProgressDatas(matchingMonth);
   };
+
   return (
     <div>
       <p className="text-center text-2xl font-semibold">
@@ -112,6 +111,7 @@ const Progress = () => {
           {/* Date */}
           <div className=" mx-auto mt-2 w-72 z-30">
             <label>Month:</label>
+
             <select
               onChange={handleSort}
               className="select select-warning w-full max-w-xs"

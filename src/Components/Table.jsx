@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 const Table = ({ header, body, refetch }) => {
   const [error, setError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
-  const [transectionId, setTransectionId] = useState("");
+  const [transactionId, setTransactionId] = useState("");
   const axiosOpen = useAxiosOpen();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [employeeToPay, setEmployeeToPay] = useState([]);
@@ -56,11 +56,9 @@ const Table = ({ header, body, refetch }) => {
     e.preventDefault();
     const time = e.target.time.value;
     // validate the month and year and do not pay for same
-    const res = await axiosOpen.get(
-      `/dashboard/details/${employeeToPay?.email}`
-    );
+    const res = await axiosOpen.get(`/dashboard/details/${employeeToPay?._id}`);
     const filter = res.data.filter((date) => date.time === time);
-    console.log(filter);
+    console.log(res.data);
     if (filter.length > 0) {
       Swal.fire("You have already paid for that month !");
       return;
@@ -100,7 +98,7 @@ const Table = ({ header, body, refetch }) => {
     } else {
       console.log("payment intent", paymentIntent);
       if (paymentIntent.status === "succeeded") {
-        setTransectionId(paymentIntent.id);
+        setTransactionId(paymentIntent.id);
         // seve the payments in the database
         const payment = {
           name: employeeToPay.name,
@@ -122,7 +120,7 @@ const Table = ({ header, body, refetch }) => {
             showConfirmButton: false,
             timer: 1500,
           });
-          setTransectionId("");
+          setTransactionId("");
           setIsOpen(false);
         }
       }
@@ -184,8 +182,8 @@ const Table = ({ header, body, refetch }) => {
               </td>
               <td className="whitespace-nowrap">
                 <Link
-                  className="btn btn-outline   btn-sm"
-                  to={`/dashboard/details/${employee?.email}`}
+                  className="btn btn-outline btn-sm"
+                  to={`/dashboard/details/${employee._id}`}
                 >
                   Details
                 </Link>
@@ -194,7 +192,7 @@ const Table = ({ header, body, refetch }) => {
           ))}
         </tbody>
       </table>
-
+      {/* Modal */}
       <Modal
         isOpen={modalIsOpen}
         //   onAfterOpen={afterOpenModal}
@@ -239,8 +237,8 @@ const Table = ({ header, body, refetch }) => {
           </form>
         </div>
         <p className="text-red-600">{error}</p>
-        {transectionId && (
-          <p className="text-green-600">Your Transection id: {transectionId}</p>
+        {transactionId && (
+          <p className="text-green-600">Your Transection id: {transactionId}</p>
         )}
       </Modal>
     </div>

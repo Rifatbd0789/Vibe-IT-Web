@@ -17,7 +17,6 @@ import Private from "./Private";
 import HrRoute from "./HrRoute";
 import EmployeeRoute from "./EmployeeRoute";
 import AdminRoute from "./AdminRoute";
-// import Table from "../Components/Table";
 
 export const router = createBrowserRouter([
   {
@@ -112,14 +111,14 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/details/:email",
+        path: "/dashboard/details/:id",
         element: (
           <HrRoute>
             <Details />
           </HrRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/dashboard/details/${params?.email}`),
+          fetch(`http://localhost:5000/dashboard/details/${params?.id}`),
       },
     ],
   },

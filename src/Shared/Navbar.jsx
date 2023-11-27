@@ -21,7 +21,7 @@ const Navbar = () => {
   };
   const allLink = (
     <>
-      {Role?.user === "hr" ? (
+      {Role?.user === "HR" ? (
         <li>
           <NavLink
             to="/dashboard/hrHome"
@@ -30,7 +30,7 @@ const Navbar = () => {
             Dashboard
           </NavLink>
         </li>
-      ) : Role?.user === "employee" ? (
+      ) : Role?.user === "Employee" ? (
         <li>
           <NavLink
             to="/dashboard/emHome"
@@ -39,10 +39,19 @@ const Navbar = () => {
             Dashboard
           </NavLink>
         </li>
-      ) : (
+      ) : Role?.user === "Admin" ? (
         <li>
           <NavLink
             to="/dashboard/adHome"
+            className={({ isActive }) => (isActive ? " bg-slate-200" : "")}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      ) : (
+        <li>
+          <NavLink
+            to="/dashboard"
             className={({ isActive }) => (isActive ? " bg-slate-200" : "")}
           >
             Dashboard
