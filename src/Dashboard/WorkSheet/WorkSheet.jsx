@@ -59,7 +59,7 @@ const WorkSheet = () => {
   return (
     <div className="mx-10">
       {/* Work Form */}
-      <div className="flex flex-col lg:flex-row md:justify-evenly ">
+      <div className="flex flex-col lg:flex-row md:justify-evenly mb-5">
         {/* Drop Down */}
         <div className="  lg:w-72 z-30">
           <label>Tasks:</label>
@@ -144,7 +144,7 @@ const WorkSheet = () => {
           {/* submit button */}
           <div className="mt-5 flex justify-center">
             <input
-              className="btn btn-outline btn-warning"
+              className="btn btn-warning btn-sm lg:btn-md  shadow-warning shadow-md  border-none   normal-case"
               type="submit"
               value="Add"
             />

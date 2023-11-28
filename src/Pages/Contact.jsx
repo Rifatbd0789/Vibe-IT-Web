@@ -1,15 +1,13 @@
 import { FcHome, FcPhone } from "react-icons/fc";
 import { MdEmail } from "react-icons/md";
 import Swal from "sweetalert2";
+import HeaderTitle from "../Components/Shared/HeaderTitle";
+import Button from "../Components/Shared/Button";
 
 const ContactUs = () => {
   return (
     <div>
-      {/* <div>
-        <h1 className="text-center rounded-xl border border-l-4 border-slate-200 mx-5  mt-5 md:text-3xl font-bold py-2">
-          Contact Us!
-        </h1>
-      </div> */}
+      <HeaderTitle title="Contact Us!" />
       <div className="hero md:min-h-screen ">
         <div className="hero-content pt-0 flex flex-col lg:flex-row  lg:gap-40">
           <div>
@@ -56,8 +54,20 @@ const ContactUs = () => {
                       className="textarea textarea-bordered textarea-lg w-full max-w-lg "
                     ></textarea>
                   </div>
-                  <div className="form-control">
-                    <button
+                  <div
+                    onClick={() =>
+                      Swal.fire({
+                        position: "middle",
+                        icon: "success",
+                        text: "Your Message Sent Successfully!",
+                        showConfirmButton: false,
+                        timer: 1500,
+                      })
+                    }
+                    className="form-control"
+                  >
+                    <Button btn="Send!" />
+                    {/* <button
                       onClick={() =>
                         Swal.fire({
                           position: "middle",
@@ -70,7 +80,7 @@ const ContactUs = () => {
                       className="btn btn-warning btn-sm lg:btn-md   shadow-md  border-none   normal-case hover:text-black"
                     >
                       Send
-                    </button>
+                    </button> */}
                   </div>
                 </div>
               </div>

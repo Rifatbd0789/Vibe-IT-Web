@@ -1,7 +1,9 @@
+import DashHeaderTitle from "../../Components/Shared/DashHeaderTitle";
+
 const AdHome = () => {
   return (
     <div>
-      <p>Hi Mr, Admin</p>
+      <DashHeaderTitle />
     </div>
   );
 };

@@ -20,6 +20,9 @@ const PaymentHistory = () => {
 
   return (
     <div>
+      <p className="text-black text-center text-2xl font-bold">
+        {user?.user?.displayName} Salary History:
+      </p>
       <PayTable payments={paymentsArray} />
     </div>
   );

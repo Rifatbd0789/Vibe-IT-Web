@@ -1,7 +1,7 @@
 import { Link, NavLink } from "react-router-dom";
 import Swal from "sweetalert2";
-import useRole from "../Hooks/useRole";
-import useAuth from "../Hooks/useAuth";
+import useAuth from "../../Hooks/useAuth";
+import useRole from "../../Hooks/useRole";
 
 const Navbar = () => {
   const { user, logOutUser } = useAuth();
@@ -21,6 +21,23 @@ const Navbar = () => {
   };
   const allLink = (
     <>
+      <li>
+        <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
+        >
+          Home
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
+        >
+          Contact Us
+        </NavLink>
+      </li>
+
       {Role?.user === "HR" ? (
         <li>
           <NavLink
@@ -58,14 +75,7 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
-      <li>
-        <NavLink
-          to="/contact"
-          className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
-        >
-          Contact Us
-        </NavLink>
-      </li>
+
       {user && (
         <li className="menu menu-horizontal">
           <p>{user?.displayName}</p>
@@ -86,7 +96,7 @@ const Navbar = () => {
               </label>
               <ul
                 tabIndex={0}
-                className="mt-3 z-[1] p-2 shadow menu menu-sm dropdown-content bg-yellow-300 rounded-box w-52"
+                className="mt-28 z-[1] p-2 shadow menu menu-horizontal dropdown-content bg-yellow-300  w-24 rounded-lg"
               >
                 <li>
                   <NavLink
@@ -114,9 +124,19 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="flex flex-col md:flex-row md:justify-between border border-warning rounded-3xl items-center">
+      <div className="flex flex-col md:flex-row md:justify-between border-2 shadow-md border-warning rounded-3xl items-center">
         <div className="">
-          <Link to="/" className="menu menu-horizontal w-fit text-xl">
+          <Link
+            to="/"
+            className="menu     menu-vertical md:menu-horizontal w-fit text-xl"
+          >
+            <div className="w-12 mr-2">
+              <img
+                className="rounded-full "
+                alt="https://i.ibb.co/N1nwWNp/a.png"
+                src="https://i.ibb.co/XybdPMh/logo.png"
+              />
+            </div>
             VibeIT
           </Link>
         </div>

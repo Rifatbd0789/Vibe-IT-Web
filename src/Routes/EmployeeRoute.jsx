@@ -22,7 +22,7 @@ const EmployeeRoute = ({ children }) => {
       .then(() =>
         Swal.fire({
           position: "middle",
-          icon: "success",
+          icon: "error",
           text: "Please Login With Employee Account!",
           showConfirmButton: false,
           timer: 2500,

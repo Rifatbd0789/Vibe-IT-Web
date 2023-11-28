@@ -1,19 +1,21 @@
 import { Link, Outlet } from "react-router-dom";
-import Navbar from "../Shared/Navbar";
 import DashNav from "../Dashboard/DashNav'/DashNav";
 import useRole from "../Hooks/useRole";
-import Footer from "../Shared/Footer";
+import Navbar from "../Components/Shared/Navbar";
+import Footer from "../Components/Shared/Footer";
 const Dashboard = () => {
   const [Role] = useRole();
   return (
     <div>
       {Role?.user ? (
         <div className="bg-yellow-300 ">
-          <div className="px-5">
-            <Navbar />
+          <div className="lg:px-3">
+            <div className="p-5">
+              <Navbar />
+            </div>
+            <DashNav />
+            <Outlet />
           </div>
-          <DashNav />
-          <Outlet />
           <Footer />
         </div>
       ) : (

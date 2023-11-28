@@ -71,7 +71,7 @@ const AllEmployee = () => {
           <div className="overflow-auto h-64 rounded-2xl border border-warning ">
             <table className="table table-pin-rows ">
               {/* head */}
-              <thead>
+              <thead className="divide-y divide-gray-100 bg-warning text-black">
                 <tr>
                   <th>#</th>
                   <th>Name</th>

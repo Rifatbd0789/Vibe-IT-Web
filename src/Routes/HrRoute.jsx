@@ -22,7 +22,7 @@ const HrRoute = ({ children }) => {
       .then(() =>
         Swal.fire({
           position: "middle",
-          icon: "success",
+          icon: "error",
           text: "Please Login With HR Account!",
           showConfirmButton: false,
           timer: 2500,

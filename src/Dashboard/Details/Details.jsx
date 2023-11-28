@@ -30,7 +30,7 @@ const Details = () => {
   });
   return (
     <div>
-      <div className="flex flex-col lg:flex-row text-center lg:text-left justify-center mx-auto">
+      <div className="flex flex-col lg:flex-row items-center text-center lg:text-left justify-center mx-auto">
         <div>
           <img
             className="w-1/2 mx-auto rounded-xl"
@@ -40,11 +40,11 @@ const Details = () => {
         </div>
         <div className="md:text-2xl">
           <h2>
-            <span className=" font-semibold underline">Name: </span>
+            <span className=" font-medium  underline">Name: </span>
             {employee?.name}
           </h2>
           <h2>
-            <span className=" font-semibold underline">Designation: </span>
+            <span className=" font-medium underline">Designation: </span>
             {employee?.designation}
           </h2>
         </div>

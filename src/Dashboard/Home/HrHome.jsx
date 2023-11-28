@@ -1,9 +1,7 @@
+import DashHeaderTitle from "../../Components/Shared/DashHeaderTitle";
+
 const HrHome = () => {
-  return (
-    <div>
-      <h1>Hi from HR</h1>
-    </div>
-  );
+  return <DashHeaderTitle />;
 };
 
 export default HrHome;

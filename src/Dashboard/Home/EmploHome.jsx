@@ -1,7 +1,9 @@
+import DashHeaderTitle from "../../Components/Shared/DashHeaderTitle";
+
 const EmploHome = () => {
   return (
     <div>
-      <p>Employee Home</p>
+      <DashHeaderTitle />
     </div>
   );
 };

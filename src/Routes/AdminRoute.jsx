@@ -22,7 +22,7 @@ const AdminRoute = ({ children }) => {
       .then(() =>
         Swal.fire({
           position: "middle",
-          icon: "success",
+          icon: "error",
           text: "Please Login With Admin Account!",
           showConfirmButton: false,
           timer: 2500,

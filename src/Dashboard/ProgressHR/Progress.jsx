@@ -48,7 +48,7 @@ const Progress = () => {
       <p className="text-center text-2xl font-semibold">
         Total WorkingHour: {totalHour}
       </p>
-      <div className="text-center lg:text-left">
+      <div className="text-center mb-5 lg:text-left">
         {/* Search */}
         <div className="flex flex-col lg:flex-row lg:justify-evenly ">
           {/* Drop Down */}
@@ -119,82 +119,43 @@ const Progress = () => {
               className="relative w-full bg-orange-400 cursor-default rounded-lg  py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
               // className="select select-warning w-full max-w-xs"
             >
-              <option
-                selected
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-              >
+              <option className="bg-white" selected>
                 Search by Month
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="1"
-              >
+              <option className="bg-white" value="1">
                 January
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="2"
-              >
+              <option className="bg-white" value="2">
                 February
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="3"
-              >
+              <option className="bg-white" value="3">
                 March
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="4"
-              >
+              <option className="bg-white" value="4">
                 April
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="5"
-              >
+              <option className="bg-white" value="5">
                 May
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="6"
-              >
+              <option className="bg-white" value="6">
                 June
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="7"
-              >
+              <option className="bg-white" value="7">
                 July
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="8"
-              >
+              <option className="bg-white" value="8">
                 August
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="9"
-              >
+              <option className="bg-white" value="9">
                 September
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="10"
-              >
+              <option className="bg-white" value="10">
                 October
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="11"
-              >
+              <option className="bg-white" value="11">
                 November
               </option>
-              <option
-                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
-                value="12"
-              >
+              <option className="bg-white" value="12">
                 December
               </option>
             </select>
@@ -202,16 +163,16 @@ const Progress = () => {
         </div>
       </div>
       {/* Table */}
-      <div className="overflow-auto h-64">
+      <div className="overflow-auto h-64 shadow">
         <table className="table table-pin-rows">
           {/* head */}
-          <thead>
+          <thead className="divide-y divide-gray-100 bg-warning text-black">
             <tr>
-              <th>#</th>
-              <th>Name</th>
-              <th>Task</th>
-              <th>Hour</th>
-              <th>Date</th>
+              <th className="border border-black">#</th>
+              <th className="border border-black">Name</th>
+              <th className="border border-black">Task</th>
+              <th className="border border-black">Hour</th>
+              <th className="border border-black">Date</th>
             </tr>
           </thead>
           <tbody>
@@ -223,12 +184,12 @@ const Progress = () => {
             ) : (
               progressDatas?.map((workData, index) => (
                 <tr key={workData?._id}>
-                  <td>{index + 1}</td>
-                  <td>{workData?.name}</td>
-                  <td>{workData?.task}</td>
-                  <td>{workData?.hour}</td>
+                  <td className="border border-black ">{index + 1}</td>
+                  <td className="border border-black ">{workData?.name}</td>
+                  <td className="border border-black ">{workData?.task}</td>
+                  <td className="border border-black ">{workData?.hour}</td>
 
-                  <td>{workData?.date}</td>
+                  <td className="border border-black ">{workData?.date}</td>
                 </tr>
               ))
             )}

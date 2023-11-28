@@ -3,9 +3,9 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const Testimonial = () => {
   return (
     <div>
-      <div className="   ">
+      <div className="">
         <Carousel
-          className="py-5"
+          className="py-5 text-black"
           infiniteLoop={true}
           showThumbs={true}
           swipeable={true}

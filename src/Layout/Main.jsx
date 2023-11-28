@@ -1,11 +1,11 @@
 import { Outlet } from "react-router-dom";
-import Navbar from "../Shared/Navbar";
-import Footer from "../Shared/Footer";
+import Footer from "../Components/Shared/Footer";
+import Navbar from "../Components/Shared/Navbar";
 
 const Main = () => {
   return (
     <div className="bg-yellow-300 ">
-      <div className="px-5">
+      <div className="lg:px-3">
         <div className="p-5">
           <Navbar />
         </div>

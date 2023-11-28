@@ -1,10 +1,11 @@
-import useAxiosOpen from "../Hooks/useAxiosOpen";
+import useAxiosOpen from "../../Hooks/useAxiosOpen";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import Modal from "react-modal";
 import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import Button from "../../Components/Shared/Button";
 /* eslint-disable react/prop-types */
 const Table = ({ header, body, refetch }) => {
   const [error, setError] = useState("");
@@ -127,30 +128,30 @@ const Table = ({ header, body, refetch }) => {
     }
   };
   return (
-    <div className="overflow-auto rounded-lg shadow">
+    <div className="overflow-auto h-64 shadow-md">
       <table className="table ">
         {/* head */}
-        <thead className="divide-y divide-gray-100 bg-white">
+        <thead className=" bg-warning text-black">
           <tr>
-            <th className="whitespace-nowrap">#</th>
-            <th className="whitespace-nowrap">{header.Name}</th>
-            <th className="whitespace-nowrap">{header.Email}</th>
-            <th className="whitespace-nowrap">{header.Verified}</th>
-            <th className="whitespace-nowrap">{header.BankAccount}</th>
-            <th className="whitespace-nowrap">{header.Salary}</th>
-            <th className="whitespace-nowrap">{header.Pay}</th>
-            <th className="whitespace-nowrap">{header.Details}</th>
+            <th className="border border-black">#</th>
+            <th className="border border-black">{header.Name}</th>
+            <th className="border border-black">{header.Email}</th>
+            <th className="border border-black">{header.Verified}</th>
+            <th className="border border-black">{header.BankAccount}</th>
+            <th className="border border-black">{header.Salary}</th>
+            <th className="border border-black">{header.Pay}</th>
+            <th className="border border-black">{header.Details}</th>
           </tr>
         </thead>
-        <tbody className="divide-y divide-gray-100">
+        <tbody className="">
           {body?.map((employee, index) => (
             <tr key={employee._id}>
-              <td className="whitespace-nowrap">{index + 1}</td>
-              <td className="whitespace-nowrap">
+              <td className="border border-black ">{index + 1}</td>
+              <td className="border border-black ">
                 <div className="font-bold">{employee.name}</div>
               </td>
-              <td className="whitespace-nowrap">{employee.email}</td>
-              <td className="whitespace-nowrap">
+              <td className="border border-black ">{employee.email}</td>
+              <td className="border border-black ">
                 {employee?.Verified === true ? (
                   <>
                     <button
@@ -169,20 +170,20 @@ const Table = ({ header, body, refetch }) => {
                   </button>
                 )}
               </td>
-              <td className="whitespace-nowrap">{employee?.bank}</td>
-              <td className="whitespace-nowrap">{employee?.salary}</td>
-              <td className="whitespace-nowrap">
+              <td className="border border-black">{employee?.bank}</td>
+              <td className="border border-black">{employee?.salary}</td>
+              <td className="border border-black">
                 <button
                   onClick={() => openModal(employee)}
                   disabled={employee?.Verified === false}
-                  className="btn btn-outline btn-warning btn-sm"
+                  className="btn shadow-warning shadow-md btn-warning btn-sm"
                 >
                   {header?.Pay}
                 </button>
               </td>
-              <td className="whitespace-nowrap">
+              <td className="border border-black">
                 <Link
-                  className="btn btn-outline btn-sm"
+                  className="btn shadow-warning shadow-md btn-outline btn-sm"
                   to={`/dashboard/details/${employee._id}`}
                 >
                   Details
@@ -229,9 +230,13 @@ const Table = ({ header, body, refetch }) => {
               />
             </div>
             <div className="flex gap-10 justify-center">
-              <input className="btn" type="submit" value="Pay" />
-              <button className="btn" onClick={closeModal}>
-                close
+              <input
+                className=" btn shadow-warning shadow-md btn-warning "
+                type="submit"
+                value="Pay"
+              />
+              <button onClick={closeModal}>
+                <Button btn="Close" />
               </button>
             </div>
           </form>

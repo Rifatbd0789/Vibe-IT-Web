@@ -1,8 +1,9 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosOpen from "../../Hooks/useAxiosOpen";
-import Table from "../../Components/Table";
+
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
+import Table from "./Table";
 // Publishable key
 const stripePromise = loadStripe(import.meta.env.VITE_Payment_PK);
 const EmployeeList = () => {
@@ -27,7 +28,7 @@ const EmployeeList = () => {
 
   return (
     <div>
-      <p className="text-center text-3xl my-5">
+      <p className="text-center font-bold text-3xl my-5">
         Total Employee: {employeeInfo?.length}
       </p>
       <div>

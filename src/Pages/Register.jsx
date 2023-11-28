@@ -107,12 +107,12 @@ const Register = () => {
   };
   return (
     <div>
-      <div className=" min-h-screen  ">
-        <div>
-          <div className="text-center ">
+      <div className=" min-h-screen ">
+        <div className="">
+          <div className="text-center mb-5 ">
             <h1 className="text-3xl md:text-4xl font-bold ">Register Here!</h1>
           </div>
-          <div className=" card bg-base-100">
+          <div className=" card border-2 border-warning text-black shadow-xl mx-2 md:mx-5">
             <form onSubmit={handleSubmit(onSubmit)} className="card-body">
               <div className="flex flex-col md:flex-row w-full gap-5">
                 {/* Name */}
