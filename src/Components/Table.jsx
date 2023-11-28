@@ -111,8 +111,8 @@ const Table = ({ header, body, refetch }) => {
           status: "paid",
         };
         const res = await axiosOpen.post("/payments", payment);
-        console.log("payment saved", res);
-        if (res?.data?.insertedId) {
+        console.log(res.data);
+        if (res?.data) {
           Swal.fire({
             position: "middle",
             icon: "success",
@@ -130,7 +130,7 @@ const Table = ({ header, body, refetch }) => {
     <div className="overflow-auto rounded-lg shadow">
       <table className="table ">
         {/* head */}
-        <thead className="divide-y divide-gray-100">
+        <thead className="divide-y divide-gray-100 bg-white">
           <tr>
             <th className="whitespace-nowrap">#</th>
             <th className="whitespace-nowrap">{header.Name}</th>

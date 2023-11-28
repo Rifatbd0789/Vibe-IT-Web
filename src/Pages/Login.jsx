@@ -17,7 +17,7 @@ const Login = () => {
     const email = form.get("email");
     const password = form.get("password");
     setLogInError("");
-    const res = await axiosOpen.get(`/users/${email}`);
+    const res = await axiosOpen.get(`/users/login/${email}`);
     if (res.data.fire === true) {
       setLogInError("Sorry! You are fired!");
       return;

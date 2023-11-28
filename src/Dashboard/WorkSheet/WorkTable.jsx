@@ -4,7 +4,7 @@ const WorkTable = ({ worksData }) => {
     <div>
       <div>
         <div className="overflow-auto ">
-          <table className="table">
+          <table className="table table-pin-rows">
             {/* head */}
             <thead>
               <tr>

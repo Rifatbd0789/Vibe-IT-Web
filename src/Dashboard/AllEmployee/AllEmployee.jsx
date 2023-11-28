@@ -15,7 +15,7 @@ const AllEmployee = () => {
   });
   const handleMakeHR = async (user) => {
     const res = await axiosOpen.put(`/user/${user.email}`);
-    if (res.data.modifiedCount > 0) {
+    if (res?.data) {
       Swal.fire({
         position: "middle",
         icon: "success",
@@ -38,7 +38,7 @@ const AllEmployee = () => {
     }).then(async (result) => {
       if (result.isConfirmed) {
         const res = await axiosOpen.put(`/users/fire/${user.email}`);
-        if (res.data.modifiedCount > 0) {
+        if (res?.data) {
           Swal.fire({
             position: "middle",
             icon: "success",
@@ -68,8 +68,8 @@ const AllEmployee = () => {
       <div className="mx-10 mt-5">
         {view === true ? (
           // Table View
-          <div className="overflow-auto h-64">
-            <table className="table">
+          <div className="overflow-auto h-64 rounded-2xl border border-warning ">
+            <table className="table table-pin-rows ">
               {/* head */}
               <thead>
                 <tr>

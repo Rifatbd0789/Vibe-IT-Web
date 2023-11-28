@@ -72,7 +72,7 @@ const Register = () => {
               fire: false,
             };
             axiosOpen.post("/users", user).then((res) => {
-              if (res.data.insertedId) {
+              if (res?.data) {
                 Swal.fire({
                   position: "middle",
                   icon: "success",

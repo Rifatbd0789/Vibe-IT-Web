@@ -6,7 +6,7 @@ const DashNav = () => {
   return (
     <div>
       <div>
-        <ul className="flex justify-center py-10">
+        <ul className="flex justify-center px-2 py-10">
           {Role?.user === "HR" && (
             <>
               <li>

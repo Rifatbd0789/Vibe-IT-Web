@@ -135,7 +135,7 @@ const Progress = () => {
       </div>
       {/* Table */}
       <div className="overflow-auto h-64">
-        <table className="table">
+        <table className="table table-pin-rows">
           {/* head */}
           <thead>
             <tr>

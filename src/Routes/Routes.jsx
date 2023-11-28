@@ -17,6 +17,7 @@ import Private from "./Private";
 import HrRoute from "./HrRoute";
 import EmployeeRoute from "./EmployeeRoute";
 import AdminRoute from "./AdminRoute";
+import Contact from "../Pages/Contact";
 
 export const router = createBrowserRouter([
   {
@@ -34,6 +35,10 @@ export const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register />,
+      },
+      {
+        path: "/contact",
+        element: <Contact />,
       },
     ],
   },

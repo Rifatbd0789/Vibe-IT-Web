@@ -28,6 +28,7 @@ const WorkSheet = () => {
       return res.data;
     },
   });
+  console.log(worksData);
   const handleWorkSheet = async (e) => {
     e.preventDefault();
     const form = e.target;
@@ -43,7 +44,7 @@ const WorkSheet = () => {
     };
     // sending data to database
     const res = await axiosOpen.post("/worksheet", workSheet);
-    if (res.data.insertedId) {
+    if (res?.data) {
       Swal.fire({
         position: "middle",
         icon: "success",

@@ -9,7 +9,7 @@ import {
   CartesianGrid,
   Tooltip,
   // Legend,
-  //   ResponsiveContainer,
+  ResponsiveContainer,
   //   Label,
 } from "recharts";
 import useAxiosOpen from "../../Hooks/useAxiosOpen";
@@ -49,27 +49,27 @@ const Details = () => {
         {data.length < 1 ? (
           <p className="text-red-500">Still Did Not Pay Salary!</p>
         ) : (
-          <BarChart
-            width={500}
-            height={300}
-            data={data}
-            margin={{
-              top: 5,
-              right: 30,
-              left: 20,
-              bottom: 5,
-            }}
-          >
-            <CartesianGrid strokeDasharray="3 3" />
-            <XAxis dataKey="time" />
-            <YAxis dataKey="salary" />
-            <Tooltip />
-            <Bar
-              dataKey="salary"
-              fill="Green"
-              activeBar={<Rectangle fill="red" stroke="blue" />}
-            />
-          </BarChart>
+          <ResponsiveContainer width="90%" height={350}>
+            <BarChart
+              data={data}
+              margin={{
+                top: 5,
+                right: 30,
+                left: 20,
+                bottom: 5,
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis dataKey="time" />
+              <YAxis dataKey="salary" />
+              <Tooltip />
+              <Bar
+                dataKey="salary"
+                fill="orange"
+                activeBar={<Rectangle fill="green" stroke="blue" />}
+              />
+            </BarChart>
+          </ResponsiveContainer>
         )}
       </div>
     </div>
