@@ -32,7 +32,9 @@ const Progress = () => {
     refetch();
   }, [progress, refetch, selected]);
   const handleSort = (e) => {
-    console.log(e.target.value);
+    if (e.target.value === "Search by Month") {
+      return setProgressDatas(progress);
+    }
     const matchingMonth = progress.filter((data) => {
       const dateObject = new Date(data.date);
       const monthFromData = dateObject.getMonth() + 1;
@@ -114,21 +116,87 @@ const Progress = () => {
 
             <select
               onChange={handleSort}
-              className="select select-warning w-full max-w-xs"
+              className="relative w-full bg-orange-400 cursor-default rounded-lg  py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
+              // className="select select-warning w-full max-w-xs"
             >
-              <option selected>Search by Month</option>
-              <option value="1">January</option>
-              <option value="2">February</option>
-              <option value="3">March</option>
-              <option value="4">April</option>
-              <option value="5">May</option>
-              <option value="6">June</option>
-              <option value="7">July</option>
-              <option value="8">August</option>
-              <option value="9">September</option>
-              <option value="10">October</option>
-              <option value="11">November</option>
-              <option value="12">December</option>
+              <option
+                selected
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+              >
+                Search by Month
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="1"
+              >
+                January
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="2"
+              >
+                February
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="3"
+              >
+                March
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="4"
+              >
+                April
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="5"
+              >
+                May
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="6"
+              >
+                June
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="7"
+              >
+                July
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="8"
+              >
+                August
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="9"
+              >
+                September
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="10"
+              >
+                October
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="11"
+              >
+                November
+              </option>
+              <option
+                className="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black/5 focus:outline-none sm:text-sm"
+                value="12"
+              >
+                December
+              </option>
             </select>
           </div>
         </div>

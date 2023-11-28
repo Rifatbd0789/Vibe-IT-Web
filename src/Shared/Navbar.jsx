@@ -79,7 +79,7 @@ const Navbar = () => {
                 <div className="w-12 rounded-full">
                   <img
                     className=""
-                    alt="Tailwind CSS Navbar component"
+                    alt="https://i.ibb.co/N1nwWNp/a.png"
                     src={user?.photoURL}
                   />
                 </div>

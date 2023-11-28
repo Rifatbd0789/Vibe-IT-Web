@@ -38,7 +38,7 @@ const Table = ({ header, body, refetch }) => {
   const elements = useElements();
   const verifyUser = (email) => {
     axiosOpen.put(`/users/${email}`).then((res) => {
-      if (res.data.modifiedCount > 0) {
+      if (res?.data) {
         refetch();
       }
     });

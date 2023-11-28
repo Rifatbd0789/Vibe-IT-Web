@@ -8,30 +8,20 @@ import Tilt from "react-parallax-tilt";
 const Services = ({ service }) => {
   const [scale] = useState(1.2);
   return (
-    <Tilt tiltEnable={false} scale={scale} transitionSpeed={1500}>
+    <Tilt tiltEnable={false} scale={scale} transitionSpeed={300}>
       <div className="scale-no-tilt">
         <div className="card h-96 glass mx-auto">
           <figure>
-            <img src={service.image} alt="car!" />
+            <img src={service.image} alt="https://i.ibb.co/N1nwWNp/a.png" />
           </figure>
           <div className="card-body ">
             <h2 className="card-title">{service.title}</h2>
             <p>{service.description}</p>
             <div className="card-actions justify-end">
-              <button className="btn btn-primary">Learn now!</button>
+              <button className="btn btn-warning">Learn now!</button>
             </div>
           </div>
         </div>
-        {/* <div className="header">
-          <div>
-            <img src={service.image} alt="" />
-          </div>
-          <div>{service.title}</div>
-          <hr />
-        </div>
-        <div className="form">
-          <p>{service.description}</p>
-        </div> */}
       </div>
     </Tilt>
   );

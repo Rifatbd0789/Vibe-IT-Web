@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Services from "../Components/Services";
 import useAxiosOpen from "../Hooks/useAxiosOpen";
+import Testimonial from "../Components/Testimonial";
 
 const Home = () => {
   const [services, setServices] = useState([]);
@@ -14,7 +15,7 @@ const Home = () => {
         <img
           className=" h-[250px] md:h-[400px] lg:h-[550px] w-full mb-5 rounded-3xl shadow-black shadow-2xl"
           src="https://i.ibb.co/jGz2QS9/21532173-6430427.jpg"
-          alt=""
+          alt="https://i.ibb.co/N1nwWNp/a.png"
         />
       </div>
       {/* Services */}
@@ -22,6 +23,10 @@ const Home = () => {
         {services?.map((service) => (
           <Services key={service._id} service={service} />
         ))}
+      </div>
+      {/* Testimonial */}
+      <div>
+        <Testimonial />
       </div>
     </div>
   );

@@ -30,17 +30,23 @@ const Details = () => {
   });
   return (
     <div>
-      <div className="flex flex-col md:flex-row text-center md:text-left justify-center mx-auto">
+      <div className="flex flex-col lg:flex-row text-center lg:text-left justify-center mx-auto">
         <div>
           <img
             className="w-1/2 mx-auto rounded-xl"
             src={employee?.photo}
-            alt=""
+            alt="https://i.ibb.co/N1nwWNp/a.png"
           />
         </div>
-        <div className="text-2xl font-semibold">
-          <h2>Name: {employee?.name}</h2>
-          <h2>Designation: {employee?.designation}</h2>
+        <div className="md:text-2xl">
+          <h2>
+            <span className=" font-semibold underline">Name: </span>
+            {employee?.name}
+          </h2>
+          <h2>
+            <span className=" font-semibold underline">Designation: </span>
+            {employee?.designation}
+          </h2>
         </div>
       </div>
       {/* Bar Chart */}

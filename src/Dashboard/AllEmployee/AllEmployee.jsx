@@ -132,7 +132,7 @@ const AllEmployee = () => {
                 className="card card-compact bg-base-100 shadow-xl"
               >
                 <figure>
-                  <img src={user.photo} alt="Shoes" />
+                  <img src={user.photo} alt="https://i.ibb.co/N1nwWNp/a.png" />
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title">{user.name}</h2>
