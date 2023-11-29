@@ -132,7 +132,7 @@ const AllEmployee = () => {
                 <div className="card-body">
                   <h2 className="card-title">{user.name}</h2>
                   <p>{user.designation}</p>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     {user?.role === "Employee" ? (
                       <div onClick={() => handleMakeHR(user)}>
                         <Button btn="Make HR" />
@@ -143,7 +143,9 @@ const AllEmployee = () => {
                       </div>
                     )}
                     {user.fire === true ? (
-                      <div className="text-red-400">Fired !</div>
+                      <div className="text-red-400">
+                        <p className="">Fired !</p>
+                      </div>
                     ) : (
                       <div onClick={() => handleFire(user)}>
                         <Button btn="Fire" />
