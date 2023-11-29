@@ -10,7 +10,7 @@ const PayTable = ({ payments }) => {
               <th className="border border-black">#</th>
               <th className="border border-black">Month</th>
               <th className="border border-black">Amount</th>
-              <th className="border border-black">BankAccount</th>
+              <th className="border border-black">Transaction Id</th>
             </tr>
           </thead>
           <tbody className="text-center text-black">

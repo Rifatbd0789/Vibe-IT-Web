@@ -18,11 +18,13 @@ import HrRoute from "./HrRoute";
 import EmployeeRoute from "./EmployeeRoute";
 import AdminRoute from "./AdminRoute";
 import Contact from "../Pages/Contact";
+import Error from "../Pages/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <Main />,
+    errorElement: <Error />,
     children: [
       {
         path: "/",

@@ -177,9 +177,8 @@ const Register = () => {
                     className="select select-warning w-full "
                     {...register("role", { required: true })}
                     required
-                    defaultValue="default"
                   >
-                    <option disabled value="default"></option>
+                    <option></option>
                     <option>HR</option>
                     <option>Employee</option>
                   </select>

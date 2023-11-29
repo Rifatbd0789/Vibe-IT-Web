@@ -66,10 +66,10 @@ const AllEmployee = () => {
           </button>
         )}
       </div>
-      <div className="mx-10 mt-5">
+      <div className="mt-5">
         {view === true ? (
           // Table View
-          <div className="overflow-auto h-64 rounded-2xl border border-warning ">
+          <div className="overflow-auto h-64 border border-warning ">
             <table className="table table-pin-rows ">
               {/* head */}
               <thead className="divide-y divide-gray-100 bg-warning text-black">
@@ -95,9 +95,9 @@ const AllEmployee = () => {
                       <td>{user?.designation}</td>
                       <td>
                         {user?.role === "Employee" ? (
-                          <p onClick={() => handleMakeHR(user)}>
+                          <div onClick={() => handleMakeHR(user)}>
                             <Button btn="Make HR" />
-                          </p>
+                          </div>
                         ) : (
                           <img className="w-8" src={HrSvg} alt="HR!" />
                         )}
@@ -107,9 +107,9 @@ const AllEmployee = () => {
                         {user.fire === true ? (
                           <p className="text-red-400">Fired !</p>
                         ) : (
-                          <p onClick={() => handleFire(user)}>
+                          <div onClick={() => handleFire(user)}>
                             <Button btn="Fire" />
-                          </p>
+                          </div>
                         )}
                       </td>
                     </tr>
@@ -120,11 +120,11 @@ const AllEmployee = () => {
           </div>
         ) : (
           // Grid View
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-5 mx-auto">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-5 mx-10">
             {users?.map((user) => (
               <div
                 key={user._id}
-                className="card card-compact bg-base-100 shadow-xl"
+                className="card card-compact bg-base-100 shadow-xl mx-auto"
               >
                 <figure>
                   <img src={user.photo} alt="https://i.ibb.co/N1nwWNp/a.png" />
