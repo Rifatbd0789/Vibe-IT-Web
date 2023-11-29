@@ -41,7 +41,7 @@ const Navbar = () => {
       {Role?.user === "HR" ? (
         <li>
           <NavLink
-            to="/dashboard/hrHome"
+            to="/dashboard/hr-home"
             className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
           >
             Dashboard
@@ -50,7 +50,7 @@ const Navbar = () => {
       ) : Role?.user === "Employee" ? (
         <li>
           <NavLink
-            to="/dashboard/emHome"
+            to="/dashboard/em-home"
             className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
           >
             Dashboard
@@ -59,7 +59,7 @@ const Navbar = () => {
       ) : Role?.user === "Admin" ? (
         <li>
           <NavLink
-            to="/dashboard/adHome"
+            to="/dashboard/ad-home"
             className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
           >
             Dashboard

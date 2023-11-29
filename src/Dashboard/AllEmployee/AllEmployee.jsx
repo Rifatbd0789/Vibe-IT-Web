@@ -2,7 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosOpen from "../../Hooks/useAxiosOpen";
 import { useState } from "react";
 import Swal from "sweetalert2";
-
+import HrSvg from "/HrSvg.svg";
+import Button from "../../Components/Shared/Button";
 const AllEmployee = () => {
   const axiosOpen = useAxiosOpen();
   const [view, setView] = useState(true);
@@ -94,27 +95,21 @@ const AllEmployee = () => {
                       <td>{user?.designation}</td>
                       <td>
                         {user?.role === "Employee" ? (
-                          <button
-                            onClick={() => handleMakeHR(user)}
-                            className="btn"
-                          >
-                            Make HR
-                          </button>
+                          <p onClick={() => handleMakeHR(user)}>
+                            <Button btn="Make HR" />
+                          </p>
                         ) : (
-                          <p>Already {user.role}</p>
+                          <img className="w-8" src={HrSvg} alt="HR!" />
                         )}
                       </td>
 
                       <td>
                         {user.fire === true ? (
-                          <p className="text-red-400">Fired</p>
+                          <p className="text-red-400">Fired !</p>
                         ) : (
-                          <button
-                            onClick={() => handleFire(user)}
-                            className="btn"
-                          >
-                            Fire
-                          </button>
+                          <p onClick={() => handleFire(user)}>
+                            <Button btn="Fire" />
+                          </p>
                         )}
                       </td>
                     </tr>
@@ -125,7 +120,7 @@ const AllEmployee = () => {
           </div>
         ) : (
           // Grid View
-          <div className="grid grid-cols-5 gap-5 mx-auto">
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-5 mx-auto">
             {users?.map((user) => (
               <div
                 key={user._id}
@@ -137,23 +132,22 @@ const AllEmployee = () => {
                 <div className="card-body">
                   <h2 className="card-title">{user.name}</h2>
                   <p>{user.designation}</p>
-                  <div className="card-actions justify-between">
+                  <div className="flex justify-between">
                     {user?.role === "Employee" ? (
-                      <button
-                        onClick={() => handleMakeHR(user)}
-                        className="btn"
-                      >
-                        Make HR
-                      </button>
+                      <div onClick={() => handleMakeHR(user)}>
+                        <Button btn="Make HR" />
+                      </div>
                     ) : (
-                      <p className="my-5 text-green-400">Already {user.role}</p>
+                      <div>
+                        <img className="w-8 my-5" src={HrSvg} alt="HR!" />
+                      </div>
                     )}
-                    {user?.fire === true ? (
-                      <p className="text-red-400">Fired</p>
+                    {user.fire === true ? (
+                      <div className="text-red-400">Fired !</div>
                     ) : (
-                      <button onClick={() => handleFire(user)} className="btn">
-                        Fire
-                      </button>
+                      <div onClick={() => handleFire(user)}>
+                        <Button btn="Fire" />
+                      </div>
                     )}
                   </div>
                 </div>

@@ -34,7 +34,7 @@ const Newsletter = () => {
                     Swal.fire({
                       position: "middle",
                       icon: "success",
-                      text: "Thanks! you become a subscriber !",
+                      text: "Thanks! you for become a subscriber !",
                       showConfirmButton: false,
                       timer: 1500,
                     })

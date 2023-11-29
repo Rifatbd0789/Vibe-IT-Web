@@ -3,6 +3,7 @@ import DashNav from "../Dashboard/DashNav'/DashNav";
 import useRole from "../Hooks/useRole";
 import Navbar from "../Components/Shared/Navbar";
 import Footer from "../Components/Shared/Footer";
+import Button from "../Components/Shared/Button";
 const Dashboard = () => {
   const [Role] = useRole();
   return (
@@ -19,10 +20,10 @@ const Dashboard = () => {
           <Footer />
         </div>
       ) : (
-        <div className=" text-center mt-20 mx-auto ">
+        <div className=" text-center mt-20 mx-auto">
           <p className="text-red-500">Nothing is Here please go back</p>
-          <Link to="/" className="btn btn-md btn-outline btn-warning">
-            Go Home
+          <Link to="/">
+            <Button btn="Go Home" />
           </Link>
         </div>
       )}

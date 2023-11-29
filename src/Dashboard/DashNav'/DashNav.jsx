@@ -16,7 +16,7 @@ const DashNav = () => {
                       ? " bg-orange-400 justify-center"
                       : "justify-center"
                   }
-                  to="/dashboard/hrHome"
+                  to="/dashboard/hr-home"
                 >
                   Home
                 </NavLink>
@@ -29,7 +29,7 @@ const DashNav = () => {
                       ? " bg-orange-400 justify-center"
                       : "justify-center"
                   }
-                  to="/dashboard/employeeList"
+                  to="/dashboard/employee-list"
                 >
                   Employee List
                 </NavLink>
@@ -58,7 +58,7 @@ const DashNav = () => {
                       ? " bg-orange-400 justify-center"
                       : "justify-center"
                   }
-                  to="/dashboard/emHome"
+                  to="/dashboard/em-home"
                 >
                   Home
                 </NavLink>
@@ -71,7 +71,7 @@ const DashNav = () => {
                       ? " bg-orange-400 justify-center"
                       : "justify-center"
                   }
-                  to="/dashboard/paymentHistory"
+                  to="/dashboard/payment-history"
                 >
                   Payment History
                 </NavLink>
@@ -100,7 +100,7 @@ const DashNav = () => {
                       ? " bg-orange-400 justify-center"
                       : "justify-center"
                   }
-                  to="/dashboard/AdHome"
+                  to="/dashboard/ad-home"
                 >
                   Home
                 </NavLink>
@@ -113,7 +113,7 @@ const DashNav = () => {
                       ? " bg-orange-400 justify-center"
                       : "justify-center"
                   }
-                  to="/dashboard/allEmployee"
+                  to="/dashboard/all-employee-list"
                 >
                   All Employee
                 </NavLink>

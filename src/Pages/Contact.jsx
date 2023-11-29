@@ -1,13 +1,14 @@
 import { FcHome, FcPhone } from "react-icons/fc";
 import { MdEmail } from "react-icons/md";
 import Swal from "sweetalert2";
-import HeaderTitle from "../Components/Shared/HeaderTitle";
+// import HeaderTitle from "../Components/Shared/HeaderTitle";
 import Button from "../Components/Shared/Button";
+import HeaderTitle from "../Components/Shared/HeaderTitle";
 
 const ContactUs = () => {
   return (
     <div>
-      <HeaderTitle title="Contact Us!" />
+      <HeaderTitle title="Visit Us!" />
       <div className="hero md:min-h-screen ">
         <div className="hero-content pt-0 flex flex-col lg:flex-row  lg:gap-40">
           <div>

@@ -52,7 +52,7 @@ export const router = createBrowserRouter([
     ),
     children: [
       {
-        path: "/dashboard/hrHome",
+        path: "/dashboard/hr-home",
         element: (
           <HrRoute>
             <HrHome />
@@ -60,7 +60,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/emHome",
+        path: "/dashboard/em-home",
         element: (
           <EmployeeRoute>
             <EmploHome />
@@ -68,7 +68,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/adHome",
+        path: "/dashboard/ad-home",
         element: (
           <AdminRoute>
             <AdHome />,
@@ -76,7 +76,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/employeeList",
+        path: "/dashboard/employee-list",
         element: (
           <HrRoute>
             <EmployeeList />,
@@ -84,7 +84,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/allEmployee",
+        path: "/dashboard/all-employee-list",
         element: (
           <AdminRoute>
             <AllEmployee />,
@@ -92,7 +92,7 @@ export const router = createBrowserRouter([
         ),
       },
       {
-        path: "/dashboard/paymentHistory",
+        path: "/dashboard/payment-history",
         element: (
           <EmployeeRoute>
             <PaymentHistory />,
@@ -123,7 +123,9 @@ export const router = createBrowserRouter([
           </HrRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/dashboard/details/${params?.id}`),
+          fetch(
+            `https://vibe-it-server.vercel.app/dashboard/details/${params?.id}`
+          ),
       },
     ],
   },

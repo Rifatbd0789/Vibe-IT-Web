@@ -175,7 +175,7 @@ const Register = () => {
                   </label>
                   <select
                     className="select select-warning w-full "
-                    {...register("role")}
+                    {...register("role", { required: true })}
                     required
                     defaultValue="default"
                   >
