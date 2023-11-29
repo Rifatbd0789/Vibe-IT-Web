@@ -58,7 +58,7 @@ const ContactUs = () => {
                   <div
                     onClick={() =>
                       Swal.fire({
-                        position: "middle",
+                        position: "center",
                         icon: "success",
                         text: "Your Message Sent Successfully!",
                         showConfirmButton: false,
@@ -68,20 +68,6 @@ const ContactUs = () => {
                     className="form-control"
                   >
                     <Button btn="Send!" />
-                    {/* <button
-                      onClick={() =>
-                        Swal.fire({
-                          position: "middle",
-                          icon: "success",
-                          text: "Your Message Sent Successfully!",
-                          showConfirmButton: false,
-                          timer: 1500,
-                        })
-                      }
-                      className="btn btn-warning btn-sm lg:btn-md   shadow-md  border-none   normal-case hover:text-black"
-                    >
-                      Send
-                    </button> */}
                   </div>
                 </div>
               </div>

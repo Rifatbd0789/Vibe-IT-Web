@@ -26,7 +26,7 @@ const Login = () => {
       .then(() => {
         e.target.reset();
         Swal.fire({
-          position: "middle",
+          position: "center",
           icon: "success",
           text: "Successfully! Logged In! ",
           showConfirmButton: false,
@@ -42,7 +42,7 @@ const Login = () => {
     googleLogIn()
       .then(() => {
         Swal.fire({
-          position: "middle",
+          position: "center",
           icon: "success",
           text: "Successfully! Registered & Logged In! ",
           showConfirmButton: false,

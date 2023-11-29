@@ -21,7 +21,7 @@ const AdminRoute = ({ children }) => {
     logOutUser()
       .then(() =>
         Swal.fire({
-          position: "middle",
+          position: "center",
           icon: "error",
           text: "Please Login With Admin Account!",
           showConfirmButton: false,

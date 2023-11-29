@@ -117,9 +117,9 @@ const Progress = () => {
             <select
               onChange={handleSort}
               className="relative w-full bg-orange-400 cursor-default rounded-lg  py-2 pl-3 pr-10 text-left shadow-md focus:outline-none focus-visible:border-indigo-500 focus-visible:ring-2 focus-visible:ring-white/75 focus-visible:ring-offset-2 focus-visible:ring-offset-orange-300 sm:text-sm"
-              // className="select select-warning w-full max-w-xs"
+              defaultValue="Search by Month"
             >
-              <option className="bg-white" selected>
+              <option className="bg-white" value="Search by Month">
                 Search by Month
               </option>
               <option className="bg-white" value="1">

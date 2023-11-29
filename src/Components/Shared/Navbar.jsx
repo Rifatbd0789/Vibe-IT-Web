@@ -10,7 +10,7 @@ const Navbar = () => {
     logOutUser()
       .then(() =>
         Swal.fire({
-          position: "middle",
+          position: "center",
           icon: "success",
           text: "LogOut Successfully!",
           showConfirmButton: false,

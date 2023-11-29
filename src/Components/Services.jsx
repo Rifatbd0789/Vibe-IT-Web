@@ -22,7 +22,7 @@ const Services = ({ service }) => {
             <div
               onClick={() =>
                 Swal.fire({
-                  position: "middle",
+                  position: "center",
                   icon: "info",
                   text: "Please Contact Us for More!",
                   showConfirmButton: false,

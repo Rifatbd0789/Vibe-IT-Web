@@ -21,7 +21,7 @@ const EmployeeRoute = ({ children }) => {
     logOutUser()
       .then(() =>
         Swal.fire({
-          position: "middle",
+          position: "center",
           icon: "error",
           text: "Please Login With Employee Account!",
           showConfirmButton: false,

@@ -21,7 +21,7 @@ const HrRoute = ({ children }) => {
     logOutUser()
       .then(() =>
         Swal.fire({
-          position: "middle",
+          position: "center",
           icon: "error",
           text: "Please Login With HR Account!",
           showConfirmButton: false,

@@ -39,9 +39,26 @@ const Table = ({ header, body, refetch }) => {
   const elements = useElements();
   const verifyUser = (email) => {
     axiosOpen.put(`/users/${email}`).then((res) => {
-      if (res?.data) {
+      console.log(res.data);
+      if (res?.data?.Verified) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: `Successfully! Verified ${res?.data?.name}`,
+          showConfirmButton: false,
+          timer: 1000,
+        });
         refetch();
+        return;
       }
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: `Successfully! Unverified ${res?.data?.name}`,
+        showConfirmButton: false,
+        timer: 1000,
+      });
+      refetch();
     });
   };
   useEffect(() => {
@@ -115,7 +132,7 @@ const Table = ({ header, body, refetch }) => {
         console.log(res.data);
         if (res?.data) {
           Swal.fire({
-            position: "middle",
+            position: "center",
             icon: "success",
             title: `Salary Paid to ${employeeToPay.name} for ${time}`,
             showConfirmButton: false,

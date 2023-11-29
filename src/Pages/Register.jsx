@@ -74,7 +74,7 @@ const Register = () => {
             axiosOpen.post("/users", user).then((res) => {
               if (res?.data) {
                 Swal.fire({
-                  position: "middle",
+                  position: "center",
                   icon: "success",
                   text: `${Name} Successfully Registered !`,
                   showConfirmButton: false,
@@ -95,7 +95,7 @@ const Register = () => {
     googleLogIn()
       .then(() => {
         Swal.fire({
-          position: "middle",
+          position: "center",
           icon: "success",
           text: "Successfully! Registered & Logged In! ",
           showConfirmButton: false,

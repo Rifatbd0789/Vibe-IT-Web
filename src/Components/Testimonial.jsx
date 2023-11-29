@@ -7,7 +7,7 @@ const Testimonial = () => {
         <Carousel
           className="py-5 text-black"
           infiniteLoop={true}
-          showThumbs={true}
+          showThumbs={false}
           swipeable={true}
         >
           {/* First */}

@@ -32,7 +32,7 @@ const Newsletter = () => {
                 <div
                   onClick={() =>
                     Swal.fire({
-                      position: "middle",
+                      position: "center",
                       icon: "success",
                       text: "Thanks! you for become a subscriber !",
                       showConfirmButton: false,
