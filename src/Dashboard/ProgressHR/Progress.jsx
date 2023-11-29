@@ -52,7 +52,7 @@ const Progress = () => {
         {/* Search */}
         <div className="flex flex-col lg:flex-row lg:justify-evenly ">
           {/* Drop Down */}
-          <div className=" mx-auto w-72 z-30">
+          <div className=" mx-auto w-72 z-50">
             <label>Name:</label>
             <Listbox value={selected} onChange={setSelected}>
               <div className="relative mt-1">
@@ -76,7 +76,7 @@ const Progress = () => {
                       <Listbox.Option
                         key={personIdx}
                         className={({ active }) =>
-                          `relative cursor-default select-none py-2 pl-10 pr-4 ${
+                          ` md:relative cursor-default select-none py-2 pl-10 pr-4 ${
                             active
                               ? "bg-amber-100 text-amber-900"
                               : "text-gray-900"
@@ -96,7 +96,7 @@ const Progress = () => {
                             {selected ? (
                               <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-amber-600">
                                 <CheckIcon
-                                  className="h-5 w-5"
+                                  className="h-5 w-5 hidden md:block"
                                   aria-hidden="true"
                                 />
                               </span>
