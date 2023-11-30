@@ -1,8 +1,13 @@
 # VIBE-IT website using React , MongoDB, ExpressJS and Node(MERN)
 
-### VIBE-IT Live Link : [ https://vibe-it.web.app/](https://vibe-it.web.app/)
+## VIBE-IT Live Link : [ https://vibe-it.web.app/](https://vibe-it.web.app/)
 
-##### Some features and functionalities of Vibe-iT Website:
+##### Admin Email and Password:
+
+- Admin Email: admin@gmail.com
+- Admin Password: 123456F$
+
+#### Some features and functionalities of Vibe-iT Website:
 
 - User can visit this website to know about our services, our office address and phone number.
 - User can subscribe to our newsletter to get all the updates, discounts and news of our company

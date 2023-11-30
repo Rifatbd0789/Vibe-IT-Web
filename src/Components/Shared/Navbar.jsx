@@ -110,14 +110,30 @@ const Navbar = () => {
             </div>
           </>
         ) : (
-          <>
-            <Link
-              to={"/login"}
-              // className="btn btn-sm md:btn-md "
-            >
-              Login
-            </Link>
-          </>
+          // <div className="flex gap-5">
+          <div className="flex justify-items-center  flex-col md:flex-row text-center gap-3">
+            <li>
+              <NavLink
+                className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
+                to={"/login"}
+                // className="btn btn-sm md:btn-md "
+              >
+                Login
+              </NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) =>
+                  isActive ? " bg-orange-400" : "text-center"
+                }
+                to={"/register"}
+                // className="btn btn-sm md:btn-md "
+              >
+                Register
+              </NavLink>
+            </li>
+          </div>
+          // </div>
         )}
       </li>
     </>
@@ -128,7 +144,7 @@ const Navbar = () => {
         <div className="">
           <Link
             to="/"
-            className="menu     menu-vertical md:menu-horizontal w-fit text-xl"
+            className="menu  menu-vertical md:menu-horizontal w-fit text-xl"
           >
             <div className="w-12 mr-2">
               <img
