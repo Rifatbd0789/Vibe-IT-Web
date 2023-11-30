@@ -75,67 +75,64 @@ const Navbar = () => {
           </NavLink>
         </li>
       )}
-
       {user && (
         <li className="menu menu-horizontal">
           <p>{user?.displayName}</p>
         </li>
       )}
-      <li>
-        {user ? (
-          <>
-            <div className="dropdown dropdown-end  left-0">
-              <label tabIndex={0} className="avatar">
-                <div className="w-12 rounded-full">
-                  <img
-                    className=""
-                    alt="https://i.ibb.co/N1nwWNp/a.png"
-                    src={user?.photoURL}
-                  />
-                </div>
-              </label>
-              <ul
-                tabIndex={0}
-                className="mt-28 z-[1] p-2 shadow menu menu-horizontal dropdown-content bg-yellow-300  w-24 rounded-lg"
-              >
-                <li>
-                  <NavLink
-                    onClick={handleLogOut}
-                    // className="btn btn-sm md:btn-md  "
-                  >
-                    Log Out
-                  </NavLink>
-                </li>
-              </ul>
-            </div>
-          </>
-        ) : (
-          // <div className="flex gap-5">
-          <div className="flex justify-items-center  flex-col md:flex-row text-center gap-3">
-            <li>
-              <NavLink
-                className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
-                to={"/login"}
-                // className="btn btn-sm md:btn-md "
-              >
-                Login
-              </NavLink>
-            </li>
-            <li>
-              <NavLink
-                className={({ isActive }) =>
-                  isActive ? " bg-orange-400" : "text-center"
-                }
-                to={"/register"}
-                // className="btn btn-sm md:btn-md "
-              >
-                Register
-              </NavLink>
-            </li>
+      {user ? (
+        <li>
+          <div className="dropdown dropdown-end  left-0">
+            <label tabIndex={0} className="avatar">
+              <div className="w-12 rounded-full">
+                <img
+                  className=""
+                  alt="https://i.ibb.co/N1nwWNp/a.png"
+                  src={user?.photoURL}
+                />
+              </div>
+            </label>
+            <ul
+              tabIndex={0}
+              className="mt-28 z-[1] p-2 shadow menu menu-horizontal dropdown-content bg-yellow-300  w-24 rounded-lg"
+            >
+              <li>
+                <NavLink
+                  onClick={handleLogOut}
+                  // className="btn btn-sm md:btn-md  "
+                >
+                  Log Out
+                </NavLink>
+              </li>
+            </ul>
           </div>
-          // </div>
-        )}
-      </li>
+        </li>
+      ) : (
+        // <div className="flex gap-5">
+        // <div className="flex justify-items-center  flex-col md:flex-row text-center gap-3">
+        <>
+          <li>
+            <NavLink
+              className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
+              to={"/login"}
+              // className="btn btn-sm md:btn-md "
+            >
+              Login
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? " bg-orange-400" : "text-center"
+              }
+              to={"/register"}
+              // className="btn btn-sm md:btn-md "
+            >
+              Register
+            </NavLink>
+          </li>
+        </>
+      )}
     </>
   );
   return (
