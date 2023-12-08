@@ -68,7 +68,7 @@ const Register = () => {
               salary: salary,
               bank: bank,
               photo: photo,
-              Verified: false,
+              Verified: role === "HR" ? true : false,
               fire: false,
             };
             axiosOpen.post("/users", user).then((res) => {

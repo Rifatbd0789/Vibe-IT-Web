@@ -14,6 +14,7 @@ const AllEmployee = () => {
       return res.data;
     },
   });
+  console.log(users);
   const handleMakeHR = async (user) => {
     const res = await axiosOpen.put(`/user/${user.email}`);
     if (res?.data) {
