@@ -2,7 +2,6 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosOpen from "../../Hooks/useAxiosOpen";
 import { useState } from "react";
 import Swal from "sweetalert2";
-import HrSvg from "/HrSvg.svg";
 import Button from "../../Components/Shared/Button";
 const AllEmployee = () => {
   const axiosOpen = useAxiosOpen();
@@ -14,44 +13,79 @@ const AllEmployee = () => {
       return res.data;
     },
   });
-  console.log(users);
   const handleMakeHR = async (user) => {
     const res = await axiosOpen.put(`/user/${user.email}`);
     if (res?.data) {
-      Swal.fire({
-        position: "center",
-        icon: "success",
-        title: `${user?.name} is now a HR !`,
-        showConfirmButton: false,
-        timer: 1500,
-      });
+      {
+        user?.role === "HR"
+          ? Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `${user?.name} is now Employee!`,
+              showConfirmButton: false,
+              timer: 1500,
+            })
+          : Swal.fire({
+              position: "center",
+              icon: "success",
+              title: `${user?.name} is now HR!`,
+              showConfirmButton: false,
+              timer: 1500,
+            });
+      }
+      refetch();
     }
-    refetch();
   };
   const handleFire = (user) => {
-    Swal.fire({
-      title: `Are you sure to fire ${user.name} ?`,
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        const res = await axiosOpen.put(`/users/fire/${user.email}`);
-        if (res?.data) {
-          Swal.fire({
-            position: "center",
-            icon: "success",
-            title: `${user?.name} is Fired !`,
-            showConfirmButton: false,
-            timer: 1500,
+    {
+      !user.fire
+        ? Swal.fire({
+            title: `Are you sure to fire ${user.name} ?`,
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+              const res = await axiosOpen.put(`/users/fire/${user.email}`);
+              if (res?.data) {
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: `${user?.name} is Fired !`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              }
+              refetch();
+            }
+          })
+        : Swal.fire({
+            title: `Are you sure to rejoin ${user.name} ?`,
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!",
+          }).then(async (result) => {
+            if (result.isConfirmed) {
+              const res = await axiosOpen.put(`/users/fire/${user.email}`);
+              if (res?.data) {
+                Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  title: `${user?.name} is Rejoined !`,
+                  showConfirmButton: false,
+                  timer: 1500,
+                });
+              }
+              refetch();
+            }
           });
-        }
-        refetch();
-      }
-    });
+    }
   };
   return (
     <div>
@@ -70,7 +104,7 @@ const AllEmployee = () => {
       <div className="mt-5">
         {view === true ? (
           // Table View
-          <div className="overflow-auto h-64 border border-warning ">
+          <div className="overflow-auto h-96 border border-warning ">
             <table className="table table-pin-rows ">
               {/* head */}
               <thead className="divide-y divide-gray-100 bg-warning text-black">
@@ -96,17 +130,30 @@ const AllEmployee = () => {
                       <td>{user?.designation}</td>
                       <td>
                         {user?.role === "Employee" ? (
-                          <div onClick={() => handleMakeHR(user)}>
-                            <Button btn="Make HR" />
-                          </div>
+                          <>
+                            <p>{user?.role}</p>
+                            <div onClick={() => handleMakeHR(user)}>
+                              <Button btn="Change" />
+                            </div>
+                          </>
                         ) : (
-                          <img className="w-8" src={HrSvg} alt="HR!" />
+                          <>
+                            <p>{user?.role}</p>
+                            <div onClick={() => handleMakeHR(user)}>
+                              <Button btn="Change" />
+                            </div>
+                          </>
                         )}
                       </td>
 
                       <td>
-                        {user.fire === true ? (
-                          <p className="text-red-400">Fired !</p>
+                        {user?.fire ? (
+                          <>
+                            <p className="text-red-500">Fired !</p>
+                            <div onClick={() => handleFire(user)}>
+                              <Button btn="Rejoin!" />
+                            </div>
+                          </>
                         ) : (
                           <div onClick={() => handleFire(user)}>
                             <Button btn="Fire" />
@@ -121,35 +168,51 @@ const AllEmployee = () => {
           </div>
         ) : (
           // Grid View
-          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-5 mx-10">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5 mx-10">
             {users?.map((user) => (
               <div
                 key={user._id}
-                className="card card-compact bg-base-100 shadow-xl mx-auto"
+                className="card w-full card-compact bg-base-100 shadow-xl mx-auto"
               >
                 <figure>
-                  <img src={user.photo} alt="https://i.ibb.co/N1nwWNp/a.png" />
+                  <img
+                    className="h-64"
+                    src={user.photo}
+                    alt="https://i.ibb.co/N1nwWNp/a.png"
+                  />
                 </figure>
                 <div className="card-body">
                   <h2 className="card-title">{user.name}</h2>
                   <p>{user.designation}</p>
                   <div className="flex justify-between items-center">
                     {user?.role === "Employee" ? (
-                      <div onClick={() => handleMakeHR(user)}>
-                        <Button btn="Make HR" />
+                      <div className="flex flex-col">
+                        <p>{user?.role}</p>
+                        <div onClick={() => handleMakeHR(user)}>
+                          <Button btn="Change" />
+                        </div>
                       </div>
                     ) : (
-                      <div>
-                        <img className="w-8 my-5" src={HrSvg} alt="HR!" />
+                      <div className="flex flex-col">
+                        <p>{user?.role}</p>
+                        <div onClick={() => handleMakeHR(user)}>
+                          <Button btn="Change" />
+                        </div>
                       </div>
                     )}
-                    {user.fire === true ? (
-                      <div className="text-red-400">
-                        <p className="">Fired !</p>
+                    {user?.fire ? (
+                      <div className="flex flex-col">
+                        <p className="text-red-500">Fired !</p>
+                        <div onClick={() => handleFire(user)}>
+                          <Button btn="Rejoin!" />
+                        </div>
                       </div>
                     ) : (
-                      <div onClick={() => handleFire(user)}>
-                        <Button btn="Fire" />
+                      <div className="flex flex-col">
+                        <p>Working</p>
+                        <div onClick={() => handleFire(user)}>
+                          <Button btn="Fire" />
+                        </div>
                       </div>
                     )}
                   </div>
