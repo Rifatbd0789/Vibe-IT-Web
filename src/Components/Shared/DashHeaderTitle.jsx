@@ -7,7 +7,7 @@ const DashHeaderTitle = () => {
   return (
     <div className="">
       <HeaderTitle title={`Home (${Role?.user})`} />
-      <div className="flex justify-center items-center">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-5 md:gap-0">
         <img className="w-64 rounded-xl" src={user?.user?.photoURL} alt="" />
         <div>
           <h1 className=" text-center mx-20 mb-10 text-3xl  ">

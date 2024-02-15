@@ -19,7 +19,7 @@ const Navbar = () => {
       )
       .catch((err) => Swal.fire(err.code));
   };
-  const allLink = (
+  const links = (
     <>
       <li>
         <NavLink
@@ -37,98 +37,91 @@ const Navbar = () => {
           Contact Us
         </NavLink>
       </li>
-
-      {Role?.user === "HR" ? (
-        <li>
-          <NavLink
-            to="/dashboard/hr-home"
-            className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
-          >
-            Dashboard
-          </NavLink>
-        </li>
-      ) : Role?.user === "Employee" ? (
-        <li>
-          <NavLink
-            to="/dashboard/em-home"
-            className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
-          >
-            Dashboard
-          </NavLink>
-        </li>
-      ) : Role?.user === "Admin" ? (
-        <li>
-          <NavLink
-            to="/dashboard/ad-home"
-            className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
-          >
-            Dashboard
-          </NavLink>
-        </li>
-      ) : (
-        <li>
-          <NavLink
-            to="/dashboard"
-            className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
-          >
-            Dashboard
-          </NavLink>
-        </li>
-      )}
       {user && (
-        <li className="menu menu-horizontal">
-          <p>{user?.displayName}</p>
-        </li>
+        <>
+          {Role?.user === "HR" ? (
+            <li>
+              <NavLink
+                to="/dashboard/hr-home"
+                className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
+              >
+                Dashboard
+              </NavLink>
+            </li>
+          ) : Role?.user === "Employee" ? (
+            <li>
+              <NavLink
+                to="/dashboard/em-home"
+                className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
+              >
+                Dashboard
+              </NavLink>
+            </li>
+          ) : Role?.user === "Admin" ? (
+            <li>
+              <NavLink
+                to="/dashboard/ad-home"
+                className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
+              >
+                Dashboard
+              </NavLink>
+            </li>
+          ) : (
+            <li>
+              <NavLink
+                to="/dashboard"
+                className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
+              >
+                Dashboard
+              </NavLink>
+            </li>
+          )}
+        </>
       )}
       {user ? (
-        <li>
-          <div className="dropdown dropdown-end  left-0">
-            <label tabIndex={0} className="avatar">
-              <div className="w-12 rounded-full">
-                <img
-                  className=""
-                  alt="https://i.ibb.co/N1nwWNp/a.png"
-                  src={user?.photoURL}
-                />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="mt-28 z-[1] p-2 shadow menu menu-horizontal dropdown-content bg-yellow-300  w-24 rounded-lg"
-            >
-              <li>
-                <NavLink
-                  onClick={handleLogOut}
-                  // className="btn btn-sm md:btn-md  "
-                >
-                  Log Out
-                </NavLink>
-              </li>
-            </ul>
-          </div>
-        </li>
+        <>
+          {/* <li className="">
+            <p>{user?.displayName}</p>
+          </li> */}
+          <li className="lg:hidden">
+            <Link onClick={handleLogOut} className="">
+              Log Out
+            </Link>
+          </li>
+          <li>
+            <div className="dropdown dropdown-end p-1 mr-5 hidden lg:flex">
+              <label tabIndex={0} className="avatar">
+                <div className="w-12 rounded-full link">
+                  <img
+                    className=""
+                    alt="https://i.ibb.co/N1nwWNp/a.png"
+                    src={user?.photoURL}
+                  />
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="mt-28 z-[10] p-2 shadow menu menu-horizontal dropdown-content  w-24 rounded-lg bg-yellow-300 hidden lg:flex text-black"
+              >
+                <li>
+                  <Link onClick={handleLogOut} className="bg-slate-200">
+                    Log Out
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </li>
+        </>
       ) : (
-        // <div className="flex gap-5">
-        // <div className="flex justify-items-center  flex-col md:flex-row text-center gap-3">
         <>
           <li>
             <NavLink
-              className={({ isActive }) => (isActive ? " bg-orange-400" : "")}
+              className={({ isActive }) =>
+                isActive ? " bg-blue-300 text-black" : ""
+              }
               to={"/login"}
-              // className="btn btn-sm md:btn-md "
             >
               Login
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              className={({ isActive }) =>
-                isActive ? " bg-orange-400" : "text-center"
-              }
-              to={"/register"}
-              // className="btn btn-sm md:btn-md "
-            >
-              Register
             </NavLink>
           </li>
         </>
@@ -136,26 +129,54 @@ const Navbar = () => {
     </>
   );
   return (
-    <div>
-      <div className="flex flex-col md:flex-row md:justify-between border-2 shadow-md border-warning rounded-3xl items-center">
-        <div className="">
-          <Link
-            to="/"
-            className="menu  menu-vertical md:menu-horizontal w-fit text-xl"
-          >
-            <div className="w-12 mr-2">
-              <img
-                className="rounded-full "
-                alt="https://i.ibb.co/N1nwWNp/a.png"
-                src="https://i.ibb.co/XybdPMh/logo.png"
-              />
+    <div className="">
+      <div className=" navbar border-2  shadow-md border-warning rounded-3xl ">
+        <div className="navbar-start">
+          <div className="dropdown">
+            <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-5 w-5"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M4 6h16M4 12h8m-8 6h16"
+                />
+              </svg>
             </div>
+            <ul
+              tabIndex={0}
+              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow  rounded-box w-52 bg-yellow-300"
+            >
+              {links}
+            </ul>
+          </div>
+          <Link to="/" className="btn btn-ghost text-xl">
+            <img
+              className="w-8 h-8"
+              src="https://i.ibb.co/XybdPMh/logo.png"
+              alt=""
+            />
             VibeIT
           </Link>
         </div>
-        <div className="">
-          <ul className="menu menu-horizontal items-center justify-center flex-col md:flex-row">
-            {allLink}
+        {user && (
+          <div className="navbar-end lg:hidden gap-1">
+            {/* <p>{user?.displayName}</p> */}
+            <div className="w-12 avatar rounded-full ">
+              <img className="rounded-full" src={user?.photoURL} />
+            </div>
+          </div>
+        )}
+
+        <div className="navbar-end w-full hidden lg:flex ">
+          <ul className="menu menu-horizontal space-x-2 items-center">
+            {links}
           </ul>
         </div>
       </div>

@@ -46,7 +46,7 @@ const AllEmployee = () => {
             showCancelButton: true,
             confirmButtonColor: "#3085d6",
             cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, delete it!",
+            confirmButtonText: "Yes, Fire!",
           }).then(async (result) => {
             if (result.isConfirmed) {
               const res = await axiosOpen.put(`/users/fire/${user.email}`);
