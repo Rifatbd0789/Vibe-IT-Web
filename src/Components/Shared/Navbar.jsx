@@ -80,9 +80,6 @@ const Navbar = () => {
       )}
       {user ? (
         <>
-          {/* <li className="">
-            <p>{user?.displayName}</p>
-          </li> */}
           <li className="lg:hidden">
             <Link onClick={handleLogOut} className="">
               Log Out
@@ -104,7 +101,10 @@ const Navbar = () => {
                 className="mt-28 z-[10] p-2 shadow menu menu-horizontal dropdown-content  w-24 rounded-lg bg-yellow-300 hidden lg:flex text-black"
               >
                 <li>
-                  <Link onClick={handleLogOut} className="bg-slate-200">
+                  <Link
+                    onClick={handleLogOut}
+                    className="border-2 shadow-md border-warning"
+                  >
                     Log Out
                   </Link>
                 </li>
@@ -117,7 +117,7 @@ const Navbar = () => {
           <li>
             <NavLink
               className={({ isActive }) =>
-                isActive ? " bg-blue-300 text-black" : ""
+                isActive ? " bg-orange-400 text-black" : ""
               }
               to={"/login"}
             >
